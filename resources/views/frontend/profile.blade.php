@@ -28,13 +28,19 @@
                         <div class="col-xl-3 col-lg-4 mt-lg-0 mt-3">
                             <div class="dono-info-item d-flex align-items-center justify-content-center">
                                 <h5 class="text-white me-3"><i class="las la-calendar-check"></i> Last Donate : </h5>
-                                <p class="text--base">23 Jul 1999</p>
+                                <p class="text--base">
+                                   @if($profile->date==0)
+                                       No Donate
+                                    @else
+                                        {{date('d-M-Y', strtotime($profile->date))}}
+                                    @endif
+                                </p>
                             </div>
                         </div>
                         <div class="col-xl-3 col-lg-4 mt-lg-0 mt-3">
                             <div class="dono-info-item d-flex align-items-center justify-content-center">
                                 <h5 class="text-white me-3"><i class="las la-clipboard-list"></i> Total Donate : </h5>
-                                <p class="text--base">43</p>
+                                <p class="text--base">{{$count}}</p>
                             </div>
                         </div>
                     </div>
@@ -116,6 +122,7 @@
                             <div class="card-body">
                                 <form method="POST" action="{{route('send.request')}}" class="contact-donor-form">
                                     @csrf
+                                    @if($currentDate >= $date)
                                     <input type="hidden" name="donor_id" value="{{$profile->id}}">
                                     <div class="form-group">
                                         <input type="text" name="name" value="" class="form--control form-control-md" placeholder="Enter name" maxlength="80" required="">
@@ -127,6 +134,9 @@
                                         <textarea name="message" class="form--control" placeholder="Message" maxlength="500" required=""></textarea>
                                     </div>
                                     <button type="submit" class="btn btn--base w-100">Message Now</button>
+                                    @else
+                                        <p style="text-align: center;color: red">This User Not Available </p>
+                                    @endif
                                 </form>
                             </div>
                         </div>

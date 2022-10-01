@@ -12,4 +12,7 @@ class DoneeRequest extends Model
     public function donor(){
         return $this->belongsTo(\App\Models\User::class,'donor_id');
     }
+    public function donee(){
+        return $this->belongsTo(\App\Models\User::class,'donee_id');
+    }
 }

@@ -32,6 +32,7 @@ class CreateUsersTable extends Migration
             $table->integer('role')->default(1); //0=admin;1=Done;2=Donor
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->string('date')->default(0);
             $table->string('status')->default(0);
             $table->longText('about')->nullable();
             $table->rememberToken();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use App\Models\DoneeRequest;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -32,7 +33,11 @@ class WebsiteController extends Controller
     public function userProfile($id)
     {
         $profile = User::find($id);
-        return view('frontend.profile', compact('profile'));
+        $count = DoneeRequest::where('donor_id','=',$id)->where('status','=','1')->count();
+        $currentDatee = date('Y-m-d');
+        $currentDate = date('Y-m-d', strtotime($currentDatee));
+        $date = date('Y-m-d', strtotime($profile->date ?? '12-2-2021'));
+        return view('frontend.profile', compact('profile','count','currentDate','date'));
     }
 
     public function contact()
@@ -43,7 +48,12 @@ class WebsiteController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        $request = DoneeRequest::where('donee_id','=',$user->id)->orderBy('id', 'desc')->paginate(6);
+        if($user->role==1) {
+            $request = DoneeRequest::where('donee_id', '=', $user->id)->orderBy('id', 'desc')->paginate(6);
+        }else{
+            $request = DoneeRequest::where('donor_id','=',$user->id)->orderBy('id', 'desc')->paginate(6);
+        }
+
         return view('frontend.dashboard', compact('user','request'));
     }
 
@@ -71,7 +81,9 @@ class WebsiteController extends Controller
         if ($request->gender != 3) {
             $donars = User::where('role', '=', 2)->where('city', 'like', '%' . $request->city . '%')->where('blood_group', 'like', '%' . $request->blood_id . '%')->where('gender', '=', $request->gender)->orderBy('id', 'desc')->paginate(20);
         }
-        $donars = User::where('role', '=', 2)->where('city', 'like', '%' . $request->city . '%')->where('blood_group', 'like', '%' . $request->blood_id . '%')->orderBy('id', 'desc')->paginate(20);
+        else {
+            $donars = User::where('role', '=', 2)->where('city', 'like', '%' . $request->city . '%')->where('blood_group', 'like', '%' . $request->blood_id . '%')->orderBy('id', 'desc')->paginate(20);
+        }
         return view('frontend.alldonar', compact('donars'));
     }
 
@@ -109,5 +121,22 @@ class WebsiteController extends Controller
         );
         return redirect()->back()
             ->with($notification);
+    }
+    public function donnerAccept($id)
+    {
+        $request = DoneeRequest::find($id);
+        $request->status=1;
+        $request->update();
+        $user = User::find($request->donor_id);
+        $user->date = Carbon::now()->addDays(90);
+        $user->update();
+        DoneeRequest::where('donor_id','=',$id)->where('status','=',0)->update(['status' => 3]);
+        $notification = array(
+            'messege' => '  Request Accept  successfully ',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()
+            ->with($notification);
+
     }
 }

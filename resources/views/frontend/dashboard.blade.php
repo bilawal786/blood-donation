@@ -1,5 +1,11 @@
 @extends('layouts.frontend')
 @section('content')
+    <style>
+        .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+            color: #fff;
+            background-color: #fb3640!important;
+        }
+    </style>
     <div class="container">
         <div class="row" style="margin: 20px;">
             <div class="col-lg-12">
@@ -10,17 +16,36 @@
                                 data-bs-target="#v-pills-home" role="tab" aria-controls="v-pills-home"
                                 aria-selected="true">Profile
                         </button>
+                        @if($user->role==1)
                         <button class="nav-link" style="width: 280px;" id="v-pills-profile-tab" data-bs-toggle="pill"
                                 data-bs-target="#v-pills-profile" type="button" role="tab"
                                 aria-controls="v-pills-profile" aria-selected="false">Request
                         </button>
+                        @elseif($user->role==2)
+                        <button class="nav-link" style="width: 280px;" id="v-pills-profilee-tab" data-bs-toggle="pill"
+                                data-bs-target="#v-pills-profilee" type="button" role="tab"
+                                aria-controls="v-pills-profilee" aria-selected="false">Request
+                        </button>
+                        @endif
                         <button class="nav-link" style="width: 280px;" id="v-pills-messages-tab" data-bs-toggle="pill"
                                 data-bs-target="#v-pills-messages" type="button" role="tab"
                                 aria-controls="v-pills-messages" aria-selected="false">Accept Request
                         </button>
+
                         <button class="nav-link" style="width: 280px;" id="v-pills-settings-tab" data-bs-toggle="pill"
                                 data-bs-target="#v-pills-settings" type="button" role="tab"
-                                aria-controls="v-pills-settings" aria-selected="false">Settings
+                                aria-controls="v-pills-settings" aria-selected="false"><a href="{{route('logout')}}"
+                                                                                          onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"
+                                                                                          class="nav-link">
+                                <p>
+                                    Logout
+                                </p>
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                  style="display: none;">
+                                @csrf
+                            </form>
                         </button>
                     </div>
                     <div class="tab-content" id="v-pills-tabContent">
@@ -370,6 +395,7 @@
                                             <th>Created at</th>
                                         </tr>
                                         @foreach($request as $key=>$row)
+                                            @if($row->status==0)
                                             <tr>
                                                 <td><a class="account-order-id"
                                                        href="javascript:void(0)">{{$key+1}}</a></td>
@@ -385,6 +411,7 @@
 {{--                                                       class="kenne-btn kenne-btn_sm"><span>View</span></a>--}}
 {{--                                                </td>--}}
                                             </tr>
+                                            @endif
                                         @endforeach
                                         </tbody>
                                     </table>
@@ -392,7 +419,83 @@
                             </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
-                             aria-labelledby="v-pills-messages-tab">...
+                             aria-labelledby="v-pills-messages-tab">
+                            <div class="myaccount-orders" style="width: 100%;">
+                                <h4 class="small-title" style="margin: 10px;"> Request Send </h4>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <tbody>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Donor Name</th>
+                                            <th>Status</th>
+                                            <th>Created at</th>
+                                        </tr>
+                                        @foreach($request as $key=>$row)
+                                            @if($row->status==1)
+                                                <tr>
+                                                    <td><a class="account-order-id"
+                                                           href="javascript:void(0)">{{$key+1}}</a></td>
+                                                    @if($user->role==1)
+                                                    <td>{{$row->donor->name}}</td>
+                                                    @elseif($user->role==2)
+                                                        <td>{{$row->donee->name}}</td>
+                                                    @endif
+                                                    @if($row->status == '0')
+                                                        <td><span class="badge badge-danger">Pending Request</span></td>
+                                                    @else
+                                                        <td><span class="badge badge-success">Accept Request</span></td>
+                                                    @endif
+
+                                                    <td>{{$row->created_at->format('d-m-y')}}</td>
+                                                    {{--                                                <td><a href="{{route('user.order-detail', ['id' => $row->id])}}"--}}
+                                                    {{--                                                       class="kenne-btn kenne-btn_sm"><span>View</span></a>--}}
+                                                    {{--                                                </td>--}}
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-profilee" role="tabpanel"
+                             aria-labelledby="v-pills-profile-tab">
+                            <div class="myaccount-orders" style="width: 100%;">
+                                <h4 class="small-title" style="margin: 10px;"> Request Send </h4>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <tbody>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Donee Name</th>
+                                            <th>Status</th>
+                                            <th>Created at</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        @foreach($request as $key=>$row)
+                                            @if($row->status==0)
+                                                <tr>
+                                                    <td><a class="account-order-id"
+                                                           href="javascript:void(0)">{{$key+1}}</a></td>
+                                                    <td>{{$row->donee->name}}</td>
+                                                    @if($row->status == '0')
+                                                        <td><span class="badge badge-danger">Pending Request</span></td>
+                                                    @else
+                                                        <td><span class="badge badge-success">Accept Request</span></td>
+                                                    @endif
+
+                                                    <td>{{$row->created_at->format('d-m-y')}}</td>
+                                                    <td><a href="{{route('donner.accept',['id'=>$row->id])}}"
+                                                           class="btn btn-danger"><span>Accept</span></a>
+                                                    </td>
+                                                </tr>
+                                            @endif
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
                              aria-labelledby="v-pills-settings-tab">...
@@ -406,6 +509,7 @@
 @endsection
 <script>
     import Specs from "../../../public/vendor/morrisjs/spec/specs.html";
+
     export default {
         components: {Specs}
     }
