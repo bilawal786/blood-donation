@@ -22,7 +22,8 @@
                     </div>
                     <div class="col-md-6 col-sm-12 text-right">
                         <ul class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}"><i class="icon-home"></i></a></li>
+                            <li class="breadcrumb-item"><a href="{{route('dashboard.index')}}"><i class="icon-home"></i></a>
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -36,16 +37,20 @@
                                     <div class="body">
                                         <div class="clearfix">
                                             <div class="float-left">
-                                                <i class="fa fa-2x fa-dollar text-col-blue"></i>
+                                                <i class="fa fa-2x fa-bar-chart-o text-col-green"></i>
+
                                             </div>
 
                                             <div class="number float-right text-right">
-                                                <h6>No of Donor</h6>
-                                                <span class="font700">{{\App\Models\User::where('status')->where('role','=',2)->count()}}</span>
+                                                <h6>Total Donors</h6>
+                                                <span
+                                                    class="font700">{{\App\Models\User::where('role','=',2)->count()}}</span>
                                             </div>
                                         </div>
-                                        <div class="progress progress-xs progress-transparent custom-color-blue mb-0 mt-3">
-                                            <div class="progress-bar" data-transitiongoal="87" aria-valuenow="87" style="width: 87%;"></div>
+                                        <div
+                                            class="progress progress-xs progress-transparent custom-color-blue mb-0 mt-3">
+                                            <div class="progress-bar" data-transitiongoal="87" aria-valuenow="87"
+                                                 style="width: 87%;"></div>
                                         </div>
                                         <small class="text-muted">Active </small>
                                     </div>
@@ -57,12 +62,15 @@
                                                 <i class="fa fa-2x fa-bar-chart-o text-col-green"></i>
                                             </div>
                                             <div class="number float-right text-right">
-                                                <h6>Donee</h6>
-                                                <span class="font700">{{\App\Models\User::where('status')->where('role','=',1)->count()}}</span>
+                                                <h6>Total Donee</h6>
+                                                <span
+                                                    class="font700">{{\App\Models\User::where('role','=',1)->count()}}</span>
                                             </div>
                                         </div>
-                                        <div class="progress progress-xs progress-transparent custom-color-green mb-0 mt-3">
-                                            <div class="progress-bar" data-transitiongoal="28" aria-valuenow="28" style="width: 28%;"></div>
+                                        <div
+                                            class="progress progress-xs progress-transparent custom-color-green mb-0 mt-3">
+                                            <div class="progress-bar" data-transitiongoal="28" aria-valuenow="28"
+                                                 style="width: 28%;"></div>
                                         </div>
                                         <small class="text-muted">Active</small>
                                     </div>

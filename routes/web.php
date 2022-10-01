@@ -24,22 +24,15 @@ use App\Http\Controllers\Backend\Dashboard\DashboardController;
 
 Auth::routes();
 Route::get('/', [WebsiteController::class, 'index'])->name('front.index');
-
+Route::get('/map', [WebsiteController::class, 'map'])->name('front.map');
 Route::get('all/donor/{blod?}', [WebsiteController::class, 'allDonor'])->name('all.donor');
 Route::get('contact', [WebsiteController::class, 'contact'])->name('contact');
-//Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::post('donor/search', [WebsiteController::class, 'donorSearch'])->name('donor.search');
+Route::get('admin', function (){
+   return view('auth.login2');
+});
 
-
-Route::group(['middleware' => ['auth','rolee']], function() {
-
-
-    Route::get('profile/user/{id}', [WebsiteController::class, 'userProfile'])->name('profile.user');
-    Route::post('user/update/profile', [WebsiteController::class, 'updateProfile'])->name('user.update.profile');
-    Route::get('/user/dashboard', [WebsiteController::class, 'dashboard'])->name('user.dashboard');
-    Route::post('/send/request', [WebsiteController::class, 'sendRequest'])->name('send.request');
-    Route::get('/donner/accept/{id}', [WebsiteController::class, 'donnerAccept'])->name('donner.accept');
-
+Route::group(['middleware' => ['auth','roleAdmin']], function() {
     Route::get('/user/donee', [UserController::class, 'userDonee'])->name('user.donee');
     Route::get('/user/donor', [UserController::class, 'userDonor'])->name('user.donor');
     Route::get('/user/block/{id}/{status}', [UserController::class, 'userBlock'])->name('user.block');
@@ -49,4 +42,12 @@ Route::group(['middleware' => ['auth','rolee']], function() {
     Route::resource('settings', SettingController::class);
     Route::resource('dashboard', DashboardController::class);
     Route::post('/change/password', [ChangePasswordController::class, 'store'])->name('password.change');
+});
+
+Route::group(['middleware' => ['auth']], function() {
+    Route::get('profile/user/{id}', [WebsiteController::class, 'userProfile'])->name('profile.user');
+    Route::post('user/update/profile', [WebsiteController::class, 'updateProfile'])->name('user.update.profile');
+    Route::get('/user/dashboard', [WebsiteController::class, 'dashboard'])->name('user.dashboard');
+    Route::post('/send/request', [WebsiteController::class, 'sendRequest'])->name('send.request');
+    Route::get('/donner/accept/{id}', [WebsiteController::class, 'donnerAccept'])->name('donner.accept');
 });

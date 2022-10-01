@@ -1,13 +1,15 @@
 @extends('layouts.frontend')
 @section('content')
     <div class="main-wrapper">
-        <div class="profile-header dark--overlay bg_img" style="background-image: url({{asset('assets/images/frontend/breadcrumb/61023f89990b81627537289.jpg')}});">
+        <div class="profile-header dark--overlay bg_img"
+             style="background-image: url({{asset('assets/images/frontend/breadcrumb/61023f89990b81627537289.jpg')}});">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="donor-profile">
                             <div class="donor-profile__thumb">
-                                <img  onerror="this.src='{{asset('assets/images/donor/6105373ee389c1627731774.jpg')}}'" src="{{asset($profile->img)}}" alt="image">
+                                <img onerror="this.src='{{asset('assets/images/donor/6105373ee389c1627731774.jpg')}}'"
+                                     src="{{asset($profile->img)}}" alt="image">
                             </div>
                             <div class="donor-profile__content">
                                 <h3 class="donor-profile__name">{{$profile->name}}</h3>
@@ -29,8 +31,8 @@
                             <div class="dono-info-item d-flex align-items-center justify-content-center">
                                 <h5 class="text-white me-3"><i class="las la-calendar-check"></i> Last Donate : </h5>
                                 <p class="text--base">
-                                   @if($profile->date==0)
-                                       No Donate
+                                    @if($profile->date==0)
+                                        No Donate
                                     @else
                                         {{date('d-M-Y', strtotime($profile->date))}}
                                     @endif
@@ -53,9 +55,7 @@
                 <div class="row gy-4">
                     <div class="col-lg-8 pe-lg-5">
                         <h3>Donor Details</h3>
-                        <p class="mt-2">  {{$profile->about}}.</p>
-                        <div class="mt-4">
-                            <a  target="_blank" href="" class="d-block bonus"><img onerror="this.src='{{asset('assets/images/advertisement/6107f875cb7c11627912310.png')}}'" src="" alt="image"></a>				</div>
+                        <p class="mt-2">  {{$profile->about}}</p>
                         <ul class="caption-list-two mt-4">
                             <li>
                                 <span class="caption">Name</span>
@@ -89,7 +89,8 @@
                             </li>
                             <li>
                                 <span class="caption">Email</span>
-                                <span class="value"><a href="#" class="__cf_email__" data-cfemail="2863494a415a684f45494144064b4745">{{$profile->email}}</a></span>
+                                <span class="value"><a href="#" class="__cf_email__"
+                                                       data-cfemail="2863494a415a684f45494144064b4745">{{$profile->email}}</a></span>
                             </li>
                             <li>
                                 <span class="caption">Phone</span>
@@ -107,12 +108,7 @@
                                 <span class="caption">Address</span>
                                 <span class="value">{{$profile->address}}</span>
                             </li>
-
                         </ul>
-
-                        <div class="mt-4">
-                            <a  target="_blank" href="#" class="d-block bonus"><img src="{{asset('assets/images/advertisement/6107f875cb7c11627912310.png')}}" alt="image"></a>				</div>
-
                     </div>
                     <div class="col-lg-4">
                         <div class="custom--card section--bg2">
@@ -123,25 +119,18 @@
                                 <form method="POST" action="{{route('send.request')}}" class="contact-donor-form">
                                     @csrf
                                     @if($currentDate >= $date)
-                                    <input type="hidden" name="donor_id" value="{{$profile->id}}">
-                                    <div class="form-group">
-                                        <input type="text" name="name" value="" class="form--control form-control-md" placeholder="Enter name" maxlength="80" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="email" name="email" value="" class="form--control form-control-md" placeholder="Enter email" maxlength="80" required="">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea name="message" class="form--control" placeholder="Message" maxlength="500" required=""></textarea>
-                                    </div>
-                                    <button type="submit" class="btn btn--base w-100">Message Now</button>
+                                        <input type="hidden" name="donor_id" value="{{$profile->id}}">
+                                        <div class="form-group">
+                                            <textarea name="message" class="form--control" placeholder="Message"
+                                                      maxlength="500" required=""></textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn--base w-100">Send Request</button>
                                     @else
-                                        <p style="text-align: center;color: red">This User Not Available </p>
+                                        <p style="text-align: center;color: red">This User is Not Available right now</p>
                                     @endif
                                 </form>
                             </div>
                         </div>
-                        <div class="mt-4">
-                            <a  target="_blank" href="../../add/eyJpdiI6IjgzdjJ0aUFKam83STZleTBtekEzcmc9PSIsInZhbHVlIjoiZ3R6bkZBdkRIdHJzcXBCbm5xalRkQT09IiwibWFjIjoiM2M4YWRmZjI4N2I2Y2VkMGZhYmY4OTNjYWY0NjdkODVlODk2MDNkZmNlMDY0MzQ0YWVkOWRlMzg0M2RhNm" class="d-block bonus"><img src="../../assets/images/advertisement/6107f9179987d1627912471.png" alt="image"></a>				 </div>
                     </div>
                 </div>
             </div>

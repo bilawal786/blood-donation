@@ -22,29 +22,31 @@
                                 <label for="name">Name <sup class="text--danger">*</sup></label>
                                 <input type="text" name="name" id="name" value="" placeholder="Full name" class="form--control" maxlength="80" required="">
                                 @error('name')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <h3 style="color: red">
+                                    <strong>{{$message}}</strong>
+                                </h3>
                                 @enderror
                             </div>
-
                             <div class="form-group col-lg-6">
                                 <label for="email">Email <sup class="text--danger">*</sup></label>
                                 <input type="email" name="email" id="email" value="" placeholder="Enter Email" class="form--control" maxlength="60" required="">
                                 @error('email')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <h3 style="color: red">
+                                    <strong>{{$message}}</strong>
+                                </h3>
                                 @enderror
                             </div>
-
                             <div class="form-group col-lg-6">
                                 <label for="phone">Phone <sup class="text--danger">*</sup></label>
                                 <input type="text" name="phone" id="phone" value="" placeholder="Enter Phone" class="form--control" maxlength="40" required="">
                             </div>
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-6" id="address">
+                                <label for="address">Address <sup class="text--danger">*</sup></label>
+                                <input type="text" name="address" id="address" value="" placeholder="Enter Address" class="form--control" maxlength="255">
+                            </div>
+                            <div class="form-group col-lg-6" id="city">
                                 <label for="city">City <sup class="text--danger">*</sup></label>
-                                <select name="city" class="select" id="Location" required>
+                                <select name="city" class="select" id="Location">
                                     <option value="" disabled selected>Select The City</option>
                                     <option value="Islamabad">Islamabad</option>
                                     <option value="" disabled>Punjab Cities</option>
@@ -289,21 +291,9 @@
                                     <option value="Ziarat">Ziarat</option>
                                 </select>
                             </div>
-                            <div class="form-group col-lg-6">
-                                <label for="address">Address <sup class="text--danger">*</sup></label>
-                                <input type="text" name="address" id="address" value="" placeholder="Enter Address" class="form--control" maxlength="255" required="">
-                            </div>
                             <div class="form-group col-lg-6" id="dob">
                                 <label for="date_birth">Date Of Birth <sup class="text--danger">*</sup></label>
                                 <input type="date" id="date_birth" name="dob" value="" data-language="en" class="form--control datepicker-here" maxlength="255" >
-                            </div>
-                            <div class="form-group col-lg-6" id="s_time">
-                                <label for="religion"> Starting Time <sup class="text--danger">*</sup></label>
-                                <input type="time" name="s_time" id="s_time" value="" class="form--control"  >
-                            </div>
-                            <div class="form-group col-lg-6" id="e_time">
-                                <label for="religion"> Ending Time Time <sup class="text--danger">*</sup></label>
-                                <input type="time" name="e_time" id="e_time" value="" class="form--control"  >
                             </div>
                             <div class="form-group col-lg-6" id="blood_group">
                                 <label for="blood_id">Blood Group <sup class="text--danger">*</sup></label>
@@ -319,6 +309,14 @@
                                     <option value="O-">O-</option>
                                 </select>
                             </div>
+                            <div class="form-group col-lg-6" id="s_time">
+                                <label for="religion"> Preference Available Time From <sup class="text--danger">*</sup></label>
+                                <input type="time" name="s_time" id="s_time" value="" class="form--control"  >
+                            </div>
+                            <div class="form-group col-lg-6" id="e_time">
+                                <label for="religion"> Preference Available Time To <sup class="text--danger">*</sup></label>
+                                <input type="time" name="e_time" id="e_time" value="" class="form--control"  >
+                            </div>
                             <div class="form-group col-lg-6" id="gender">
                                 <label >Gender <sup class="text--danger">*</sup></label>
                                 <select name="gender" class="form--control">
@@ -331,19 +329,19 @@
                                 <label for="last_donate">Weight <sup class="text--danger">*</sup></label>
                                 <input type="number" name="weight" id="weight" value="" data-language="en" placeholder="Your Weight in KG" class="form--control datepicker-here">
                             </div>
-
-
-                            <div class="form-group col-lg-6">
+                            <div class="form-group col-lg-6" id="image">
                                 <label for="file">Image <sup class="text--danger">*</sup></label>
-                                <input type="file" id="file" name="img" class="form--control custom-file-upload" required="">
+                                <input type="file" id="file" name="img" class="form--control custom-file-upload">
+                            </div>
+                            <div class="form-group col-lg-6" id="empty">
                             </div>
                             <div class="form-group col-lg-6" id="weight">
                                 <label for="last_donate">Password <sup class="text--danger">*</sup></label>
                                 <input type="password" name="password" id="password" value="" data-language="en" placeholder="Password" class="form--control datepicker-here">
                                 @error('password')
-                                <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <h3 style="color: red">
+                                    <strong>{{$message}}</strong>
+                                </h3>
                                 @enderror
                             </div>
                             <div class="form-group col-lg-6" id="weight">
@@ -351,7 +349,6 @@
                                 <input type="password" name="password_confirmation" id="weight" value="" data-language="en" placeholder="Password" class="form--control datepicker-here">
 
                             </div>
-
                             <div class="form-group col-lg-12">
                                 <label for="about_details">About You <sup class="text--danger">*</sup></label>
                                 <textarea name="about" id="about_details" placeholder="Enter Details" class="form--control"></textarea>
@@ -360,7 +357,7 @@
 
                         <div class="row">
                             <div class="col-lg-12">
-                                <button type="submit" class="btn btn--base w-100" id="demo">Apply Now</button>
+                                <button type="submit" class="btn btn--base w-100" id="demo">Register Now</button>
                             </div>
                         </div>
                     </form>
@@ -396,6 +393,10 @@
                 $("#e_time").hide();
                 $("#gender").hide();
                 $("#dob").hide();
+                $("#address").hide();
+                $("#image").hide();
+                $("#city").hide();
+                $("#empty").hide();
             }else{
                 $("#weight").show();
                 $("#blood_group").show();
@@ -403,6 +404,10 @@
                 $("#e_time").show();
                 $("#gender").show();
                 $("#dob").show();
+                $("#address").show();
+                $("#image").show();
+                $("#city").show();
+                $("#empty").show();
             }
 
         });

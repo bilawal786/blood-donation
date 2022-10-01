@@ -614,7 +614,10 @@
                         <div class="donor-card__content">
                             <h6 class="donor-card__name">{{$row->name}}</h6>
                             <p class="text-white fs--14px">Blood Group : ({{$row->blood_group}})</p>
-                            <span class="donor-card__amount mt-1"><i class="las la-tint"></i> 64 Times</span>
+                            @php
+                                $count = \App\Models\DoneeRequest::where('donor_id', '=', $row->id)->where('status', '=', '1')->count();
+                            @endphp
+                            <span class="donor-card__amount mt-1"><i class="las la-tint"></i> {{$count}} Times</span>
                         </div>
                     </div>
                 </div>

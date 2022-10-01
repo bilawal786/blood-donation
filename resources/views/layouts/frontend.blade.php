@@ -65,6 +65,33 @@
             font-size: 1rem;
             width: 100%;
         }
+
+        .form--control {
+            padding: 0.625rem 1.25rem;
+            border: 1px solid lightgray;
+            width: 100%;
+            background-color: #fff;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            -ms-border-radius: 3px;
+            -o-border-radius: 3px;
+            color: #000;
+            height: 3.125rem;
+        }
+
+        .nav-pills .nav-link {
+            background: 0 0;
+            border: 0;
+            border-radius: 0.25rem;
+            text-align: left;
+        }
+
+        .donor-item__thumb {
+            width: 35%;
+            height: auto;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -106,7 +133,7 @@
     <div class="header__bottom">
         <div class="container">
             <nav class="navbar navbar-expand-xl p-0 align-items-center">
-                <a class="site-logo site-title" href="">
+                <a class="site-logo site-title" href="{{route('front.index')}}">
                     <img src="{{asset('Untitled-1.png')}}" alt="logo">
                 </a>
                 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
@@ -118,11 +145,17 @@
                     <ul class="navbar-nav main-menu ms-auto">
                         <li><a href="{{route('front.index')}}">Home</a></li>
                         <li><a href="{{route('all.donor')}}">Available Donors</a></li>
+                        @auth
+                            @if(Auth::user()->role == 1)
+                                <li><a href="{{route('front.map')}}">Map</a></li>
+                            @endif
+                        @endauth
                         <li><a href="{{route('contact')}}">Contact</a></li>
                     </ul>
                     @auth
                         <div style="padding-left: 1.125rem;" class="nav-right">
-                            <a href="{{route('user.dashboard')}}" class="btn btn-md btn--base d-flex align-items-center"><i
+                            <a href="{{route('user.dashboard')}}"
+                               class="btn btn-md btn--base d-flex align-items-center"><i
                                     class="las la-user fs--18px me-2"></i> Dashboard</a>
                         </div>
                     @else
@@ -173,7 +206,7 @@
                         </ul>
                     </div>
                     <div class="col-lg-3 text-lg-end text-center">
-                        <a href="#" class="btn btn--base">Blood Donor</a>
+                        <a href="#top-donors" class="btn btn--base">Blood Donors</a>
                     </div>
                 </div>
             </div>
@@ -213,16 +246,19 @@
                         </ul>
                     </div>
                 </div>
+                @php
+                    $users = \App\Models\User::all();
+                @endphp
                 <div class="col-xl-2 col-lg-2 col-sm-4 order-lg-4 order-2">
                     <div class="footer-widget">
                         <ul class="footer-overview-list text-end">
                             <li class="footer-overview">
-                                <h4 class="footer-overview__number">4523</h4>
+                                <h4 class="footer-overview__number">{{$users->where('role', 2)->count()}}</h4>
                                 <p class="footer-overview__caption">Donors</p>
                             </li>
                             <li class="footer-overview">
-                                <h4 class="footer-overview__number">5324</h4>
-                                <p class="footer-overview__caption">Volunteers</p>
+                                <h4 class="footer-overview__number">{{$users->where('role', 1)->count()}}</h4>
+                                <p class="footer-overview__caption">Donee</p>
                             </li>
                         </ul>
                     </div>
@@ -351,8 +387,8 @@
 @stack('script')
 <script>
     @if(Session::has('messege'))
-    var type="{{Session::get('alert-type','info')}}"
-    switch(type){
+    var type = "{{Session::get('alert-type','info')}}"
+    switch (type) {
         case 'info':
             toastr.info("{{ Session::get('messege') }}");
             break;
@@ -368,7 +404,7 @@
     }
     @endif
 </script>
-
+@yield('scripts')
 </body>
 
 </html>

@@ -9,7 +9,7 @@
     <div class="sidebar-scroll">
         <div class="user-account">
             <div class="user_div">
-                <img src="{{Auth::user()->img}}" class="user-photo" style="width: 86px; height: 86px;" alt="User Profile Picture">
+                <img src="{{asset(Auth::user()->img)}}" class="user-photo" style="width: 86px; height: 86px;" alt="User Profile Picture">
             </div>
             <div class="dropdown">
                 <span>Welcome,</span>

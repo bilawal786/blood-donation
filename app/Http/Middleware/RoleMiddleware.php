@@ -18,8 +18,9 @@ class RoleMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Auth::user()->role == 0){
-            return redirect()->route('dashboard');
+            return $next($request);
+        }else{
+            return redirect()->route('front.index');
         }
-        return $next($request);
     }
 }
