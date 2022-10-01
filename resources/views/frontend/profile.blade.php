@@ -101,7 +101,7 @@
                         </ul>
 
                         <div class="mt-4">
-                            <a  target="_blank" href="#" class="d-block bonus"><img src="../../assets/images/advertisement/6107f875cb7c11627912310.png" alt="image"></a>				</div>
+                            <a  target="_blank" href="#" class="d-block bonus"><img src="{{asset('assets/images/advertisement/6107f875cb7c11627912310.png')}}" alt="image"></a>				</div>
 
                     </div>
                     <div class="col-lg-4">
@@ -110,8 +110,9 @@
                                 <h5 class="text-white">Contact with Donor</h5>
                             </div>
                             <div class="card-body">
-                                <form method="POST" action="https://script.viserlab.com/bloodlab/donor/contact" class="contact-donor-form">
-                                    <input type="hidden" name="_token" value="PLTOfZRSQfCu1VAToz4GCiQl3Q6t6BcqyOgvP8wx">							<input type="hidden" name="donor_id" value="6">
+                                <form method="POST" action="{{route('send.request')}}" class="contact-donor-form">
+                                    @csrf
+                                    <input type="hidden" name="donor_id" value="{{$profile->id}}">
                                     <div class="form-group">
                                         <input type="text" name="name" value="" class="form--control form-control-md" placeholder="Enter name" maxlength="80" required="">
                                     </div>

@@ -38,7 +38,7 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        $user_imgae=$request->user_image;
+        $user_imgae=$request->img;
 
 
         if(!empty($user_imgae)){
@@ -48,19 +48,15 @@ class ProfileController extends Controller
             $user_imgae->move($destinationPath, $user_imgae_filename);
             $user_img = $destinationPath.$user_imgae_filename;
         }else{
-            $user_img=null;
+            $user_img=Auth::user()->img;
         }
-        $this->validate($request, [
-            'first_name' => 'required',
-            'last_name' => 'required',
-        ]);
+
         $input = $request->all();
         User::where('id', Auth::user()->id)->update([
-            'first_name'=>$request->first_name,
-            'last_name'=>$request->last_name,
+            'name'=>$request->name,
             'phone'=>$request->phone,
             'address'=>$request->address,
-            'user_image'=>$user_img ?? '/images/profile/user.png',
+            'img'=>$user_img ?? '/images/profile/user.png',
         ]);
         $notification = array(
             'messege' => 'User successfully Updated',

@@ -141,7 +141,7 @@ class UserController extends Controller
             'messege' => 'User successfully delete',
             'alert-type' => 'success'
         );
-        return redirect()->route('users.index')
+        return redirect()->back()
             ->with($notification);
     }
     public function userDonee()
@@ -151,7 +151,17 @@ class UserController extends Controller
     }
     public function userDonor()
     {
-        $data = User::where('role','=',2)->orderBy('id', 'desc')->paginate(5);
+        $data = User::where('role','=',2)->orderBy('id', 'desc')->get();
         return view('backend.users.index',compact('data'));
+    }
+    public function userBlock($id,$status)
+    {
+        User::where('id','=',$id)->update(['status' => $status]);
+        $notification = array(
+            'messege' => 'User successfully Block',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()
+            ->with($notification);
     }
 }

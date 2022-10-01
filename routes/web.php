@@ -30,15 +30,17 @@ Route::get('contact', [WebsiteController::class, 'contact'])->name('contact');
 //Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
-Route::group(['middleware' => ['auth']], function() {
+Route::group(['middleware' => ['auth','rolee']], function() {
 
 
     Route::get('profile/user/{id}', [WebsiteController::class, 'userProfile'])->name('profile.user');
     Route::get('/user/dashboard', [WebsiteController::class, 'dashboard'])->name('user.dashboard');
+    Route::post('/send/request', [WebsiteController::class, 'sendRequest'])->name('send.request');
 
 
     Route::get('/user/donee', [UserController::class, 'userDonee'])->name('user.donee');
     Route::get('/user/donor', [UserController::class, 'userDonor'])->name('user.donor');
+    Route::get('/user/block/{id}/{status}', [UserController::class, 'userBlock'])->name('user.block');
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('profile', ProfileController::class);

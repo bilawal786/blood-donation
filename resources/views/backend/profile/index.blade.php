@@ -33,10 +33,10 @@
                     <div class="col-lg-4 col-md-12">
                         <div class="card profile-header">
                             <div class="body text-center">
-                                <div class="profile-image mb-3"><img src="{{asset($data->user_image)}}"
+                                <div class="profile-image mb-3"><img src="{{asset($data->img)}}"
                                                                      class="rounded-circle" style="width: 200px; height: 200px;" alt=""></div>
                                 <div>
-                                    <h4 class="mb-0"><strong>{{$data->first_name.' '.$data->last_name}}</strong></h4>
+                                    <h4 class="mb-0"><strong>{{$data->name}}</strong></h4>
                                 </div>
                             </div>
                         </div>
@@ -96,22 +96,12 @@
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
-                                                        <label>First Name:</label>
-                                                        <input type="text" name="first_name"
-                                                               value="{{Auth::user()->first_name}}" class="form-control"
-                                                               placeholder="First Name">
+                                                        <label>Name:</label>
+                                                        <input type="text" name="name"
+                                                               value="{{Auth::user()->name}}" class="form-control"
+                                                               placeholder=" Name">
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6 col-md-12">
-                                                    <div class="form-group">
-                                                        <label>Last Name:</label>
-                                                        <input type="text" name="last_name"
-                                                               value="{{Auth::user()->last_name}}" class="form-control"
-                                                               placeholder="Last Name">
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>Phone No.:</label>
@@ -127,11 +117,12 @@
                                                     </div>
                                                 </div>
                                             </div>
+
                                             <div class="row">
                                                 <div class="col-lg-6 col-md-12">
                                                     <div class="form-group">
                                                         <label>User Image:</label>
-                                                        <input type="file" id="dropify-event-profile" name="user_image" data-default-file="{{Auth::user()->user_image}}">
+                                                        <input type="file" id="dropify-event-profile" name="img" data-default-file="{{Auth::user()->img}}">
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6 col-md-12">

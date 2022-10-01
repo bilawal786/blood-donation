@@ -39,6 +39,7 @@
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Roles</th>
+                                    <th>Status</th>
                                     <th colspan="3">Action</th>
                                 </tr>
                                 @foreach ($data as $key => $user)
@@ -53,6 +54,11 @@
                                             <td>Donor</td>
                                         @endif
 
+                                        @if($user->status==1)
+                                            <td><span class="badge badge-danger">Block</span></td>
+                                        @elseif($user->status==0)
+                                            <td><span class="badge badge-success">Active</span></td>
+                                        @endif
 {{--                                        <td style="width: 75px">--}}
 {{--                                            <a class="btn btn-sm btn-info" href="{{ route('users.show',$user->id) }}">Show</a>--}}
 {{--                                        </td>--}}
@@ -60,14 +66,20 @@
 {{--                                            <a class="btn btn-sm btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>--}}
 {{--                                        </td>--}}
                                         <td style="width: 75px">
+                                            @if($user->status==0)
+                                                <a href="{{route('user.block',['id'=>$user->id,'status'=>'1'])}}" class="btn btn-sm btn-warning">Block</a>
+                                            @elseif($user->status==1)
+                                                <a href="{{route('user.block',['id'=>$user->id,'status'=>'0'])}}" class="btn btn-sm btn-success">Unblock</a>
+                                            @endif
                                             {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
                                             {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
                                             {!! Form::close() !!}
                                         </td>
                                     </tr>
                                 @endforeach
+
                             </table>
-                            {{$data->links()}}
+
                         </div>
                     </div>
                 </div>

@@ -38,8 +38,8 @@ class UserRoleSeeder extends Seeder
 
         ]);
         DB::table('users')->insert([
-            'name' => 'Domee',
-            'email' => 'domee@gmail.com',
+            'name' => 'Donee',
+            'email' => 'donee@gmail.com',
             'password' => Hash::make('12345678'),
             'phone' => '00000000',
             'about' => '',

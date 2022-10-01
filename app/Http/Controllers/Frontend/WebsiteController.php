@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\DoneeRequest;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class WebsiteController extends Controller
@@ -38,5 +40,23 @@ class WebsiteController extends Controller
     public function dashboard()
     {   $user = Auth::user();
         return view('frontend.dashboard',compact('user'));
+    }
+    public function sendRequest(Request $request)
+    {
+        $user = Auth::user();
+        $doneeRequest = new DoneeRequest();
+        $doneeRequest->donor_id = $request->donor_id;
+        $doneeRequest->donee_id = $user->id;
+        $doneeRequest->name = $request->name;
+        $doneeRequest->email = $request->email;
+        $doneeRequest->message = $request->message;
+        $doneeRequest->save();
+        $notification = array(
+            'messege' => '  Request Send successfully ',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()
+            ->with($notification);
+
     }
 }
