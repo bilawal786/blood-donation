@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -64,10 +64,36 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $request = app('request');
+
+        if ($request->hasfile('img')) {
+
+            $image1 = $request->file('img');
+            $name = time() . 'img' . '.' . $image1->getClientOriginalExtension();
+            $destinationPath = 'img/';
+            $image1->move($destinationPath, $name);
+            $filename  = 'img/' . $name;
+        }
+
         return User::create([
+
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'phone' => $data['phone'],
+            'address' => $data['address'],
+            'city' => $data['city'],
+            'role' => $data['role'],
+            'dob' => $data['dob'],
+            'gender' => $data['gender'],
+            'blood_group' => $data['blood_group'],
+            'lat' => $data['lat'],
+            'long' => $data['long'],
+            'e_time' => $data['e_time'],
+            's_time' => $data['s_time'],
+            'about' => $data['about'],
+            'img' => $filename,
+
         ]);
     }
 }

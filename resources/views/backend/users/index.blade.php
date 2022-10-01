@@ -35,8 +35,7 @@
                             <table class="table table-striped sindu_origin_table">
                                 <tr>
                                     <th>No</th>
-                                    <th>Fist Name</th>
-                                    <th>Last Name</th>
+                                    <th> Name</th>
                                     <th>Email</th>
                                     <th>Phone</th>
                                     <th>Roles</th>
@@ -44,24 +43,22 @@
                                 </tr>
                                 @foreach ($data as $key => $user)
                                     <tr>
-                                        <td>{{ ++$i }}</td>
-                                        <td>{{ $user->first_name }}</td>
-                                        <td>{{ $user->last_name }}</td>
+                                        <td>{{ ++$key }}</td>
+                                        <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
                                         <td>{{ $user->phone }}</td>
-                                        <td>
-                                            @if(!empty($user->getRoleNames()))
-                                                @foreach($user->getRoleNames() as $v)
-                                                    <label class="badge badge-success">{{ $v }}</label>
-                                                @endforeach
-                                            @endif
-                                        </td>
-                                        <td style="width: 75px">
-                                            <a class="btn btn-sm btn-info" href="{{ route('users.show',$user->id) }}">Show</a>
-                                        </td>
-                                        <td style="width: 75px">
-                                            <a class="btn btn-sm btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>
-                                        </td>
+                                        @if($user->role==1)
+                                            <td>Donee</td>
+                                        @else
+                                            <td>Donor</td>
+                                        @endif
+
+{{--                                        <td style="width: 75px">--}}
+{{--                                            <a class="btn btn-sm btn-info" href="{{ route('users.show',$user->id) }}">Show</a>--}}
+{{--                                        </td>--}}
+{{--                                        <td style="width: 75px">--}}
+{{--                                            <a class="btn btn-sm btn-primary" href="{{ route('users.edit',$user->id) }}">Edit</a>--}}
+{{--                                        </td>--}}
                                         <td style="width: 75px">
                                             {!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
                                             {!! Form::submit('Delete', ['class' => 'btn btn-sm btn-danger']) !!}
@@ -70,7 +67,7 @@
                                     </tr>
                                 @endforeach
                             </table>
-                            {!! $data->render() !!}
+                            {{$data->links()}}
                         </div>
                     </div>
                 </div>

@@ -23,11 +23,22 @@ use App\Http\Controllers\Backend\Dashboard\DashboardController;
 
 
 Auth::routes();
-Route::get('/', [WebsiteController::class, 'index']);
+Route::get('/', [WebsiteController::class, 'index'])->name('front.index');
 
+Route::get('all/donor/{blod?}', [WebsiteController::class, 'allDonor'])->name('all.donor');
+Route::get('contact', [WebsiteController::class, 'contact'])->name('contact');
 //Route::get('/home', [HomeController::class, 'index'])->name('home');
 
+
 Route::group(['middleware' => ['auth']], function() {
+
+
+    Route::get('profile/user/{id}', [WebsiteController::class, 'userProfile'])->name('profile.user');
+    Route::get('/user/dashboard', [WebsiteController::class, 'dashboard'])->name('user.dashboard');
+
+
+    Route::get('/user/donee', [UserController::class, 'userDonee'])->name('user.donee');
+    Route::get('/user/donor', [UserController::class, 'userDonor'])->name('user.donor');
     Route::resource('roles', RoleController::class);
     Route::resource('users', UserController::class);
     Route::resource('profile', ProfileController::class);

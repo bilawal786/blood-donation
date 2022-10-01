@@ -19,9 +19,9 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        $data = User::orderBy('id','DESC')->paginate(5);
-        return view('backend.users.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+//        $data = User::orderBy('id','DESC')->paginate(5);
+//        return view('backend.users.index',compact('data'))
+//            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -143,5 +143,15 @@ class UserController extends Controller
         );
         return redirect()->route('users.index')
             ->with($notification);
+    }
+    public function userDonee()
+    {
+        $data = User::where('role','=',1)->orderBy('id', 'desc')->get();
+        return view('backend.users.index',compact('data'));
+    }
+    public function userDonor()
+    {
+        $data = User::where('role','=',2)->orderBy('id', 'desc')->paginate(5);
+        return view('backend.users.index',compact('data'));
     }
 }

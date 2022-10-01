@@ -86,7 +86,7 @@
             <div class="row align-items-center gy-2">
                 <div class="col-lg-6 col-md-8 col-sm-9">
                     <ul class="header__info-list d-flex flex-wrap align-items-center justify-content-sm-start justify-content-center">
-                        <li><a href="tel:44983456780"><i class="las la-phone"></i> 44983456780</a></li>
+                        <li><a href="tel:92354637389"><i class="las la-phone"></i> +92346537992</a></li>
                         <li><a href=""><i class="las la-envelope"></i> <span class="__cf_email__"
                                                                              data-cfemail="fd99989092bd9a909c9491d39e9290">info@gmail.com</span></a>
                         </li>
@@ -109,18 +109,26 @@
                 </button>
                 <div class="collapse navbar-collapse mt-lg-0 mt-3" id="navbarSupportedContent">
                     <ul class="navbar-nav main-menu ms-auto">
-                        <li><a href="">Home</a></li>
-                        <li><a href="#top-donors">Available Donors</a></li>
-                        <li><a href="#">Contact</a></li>
+                        <li><a href="{{route('front.index')}}">Home</a></li>
+                        <li><a href="{{route('all.donor')}}">Available Donors</a></li>
+                        <li><a href="{{route('contact')}}">Contact</a></li>
                     </ul>
-                    <div class="nav-right">
-                        <a href="{{route('login')}}" class="btn btn-md btn--base d-flex align-items-center"><i
-                                class="las la-user fs--18px me-2"></i> Login</a>
-                    </div>
-                    <div style="padding-left: 1.125rem;" class="nav-right">
-                        <a href="{{route('register')}}" class="btn btn-md btn--base d-flex align-items-center"><i
-                                class="las la-user fs--18px me-2"></i> Register</a>
-                    </div>
+                    @auth
+                        <div style="padding-left: 1.125rem;" class="nav-right">
+                            <a href="{{route('user.dashboard')}}" class="btn btn-md btn--base d-flex align-items-center"><i
+                                    class="las la-user fs--18px me-2"></i> Dashboard</a>
+                        </div>
+                    @else
+                        <div class="nav-right">
+                            <a href="{{route('login')}}" class="btn btn-md btn--base d-flex align-items-center"><i
+                                    class="las la-user fs--18px me-2"></i> Login</a>
+                        </div>
+                        <div style="padding-left: 1.125rem;" class="nav-right">
+                            <a href="{{route('register')}}" class="btn btn-md btn--base d-flex align-items-center"><i
+                                    class="las la-user fs--18px me-2"></i> Register</a>
+                        </div>
+
+                    @endauth
                 </div>
             </nav>
         </div>
