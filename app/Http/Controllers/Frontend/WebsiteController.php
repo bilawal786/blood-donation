@@ -59,4 +59,12 @@ class WebsiteController extends Controller
             ->with($notification);
 
     }
+    public function donorSearch(Request $request)
+    {
+        if($request->gender!=3){
+            $donars = User::where('role', '=', 2)->where('city', 'like', '%'.$request->city.'%')->where('blood_group', 'like', '%'.$request->blood_id.'%')->where('gender','=',$request->gender)->orderBy('id', 'desc')->paginate(20);
+        }
+        $donars = User::where('role', '=', 2)->where('city', 'like', '%'.$request->city.'%')->where('blood_group', 'like', '%'.$request->blood_id.'%')->orderBy('id', 'desc')->paginate(20);
+        return view('frontend.alldonar', compact('donars'));
+    }
 }

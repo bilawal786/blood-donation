@@ -28,6 +28,7 @@ Route::get('/', [WebsiteController::class, 'index'])->name('front.index');
 Route::get('all/donor/{blod?}', [WebsiteController::class, 'allDonor'])->name('all.donor');
 Route::get('contact', [WebsiteController::class, 'contact'])->name('contact');
 //Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::post('donor/search', [WebsiteController::class, 'donorSearch'])->name('donor.search');
 
 
 Route::group(['middleware' => ['auth','rolee']], function() {

@@ -11,14 +11,14 @@
     <meta name="description"
           content="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit">
     <meta name="keywords" content="BloodLab,Blood Donation,Blood Donation Platform">
-    <link rel="shortcut icon" href="{{asset('front/assets/images/logoIcon/favicon.png')}}" type="image/x-icon">
+    <link rel="shortcut icon" href="{{asset('Untitled-1.png')}}" type="image/x-icon">
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/color_skins.css') }}">
     <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
 
 
-    <link rel="apple-touch-icon" href="{{asset('front/assets/images/logoIcon/logo.png')}}">
+    <link rel="apple-touch-icon" href="{{asset('Untitled-1.png')}}">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-title" content="BloodLab - Home">
@@ -104,7 +104,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-xl p-0 align-items-center">
                 <a class="site-logo site-title" href="">
-                    <img src="{{asset('front/assets/images/logoIcon/logo.png')}}" alt="logo">
+                    <img src="{{asset('Untitled-1.png')}}" alt="logo">
                 </a>
                 <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -178,7 +178,7 @@
             <div class="row gy-5 justify-content-between">
                 <div class="col-xl-4 col-lg-4 col-sm-8 order-lg-1 order-1">
                     <div class="footer-widget">
-                        <a href="" class="footer-logo"><img src="{{asset('front/assets/images/logoIcon/logo.png')}}"
+                        <a href="" class="footer-logo"><img src="{{asset('Untitled-1.png')}}"
                                                             alt="logo"></a>
                         <p class="mt-3">Animi sequi aliquam illum voluptatum ratione, quaerat dignissimos fugiat. Ea,
                             vitae odio quasi aspernatur expedita maiores, quidem voluptates libero quaerat fugiat nisi,
