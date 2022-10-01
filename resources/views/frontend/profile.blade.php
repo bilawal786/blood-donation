@@ -66,6 +66,10 @@
                                 </span>
                             </li>
                             <li>
+                                <span class="caption">Available Time</span>
+                                <span class="value">{{$profile->s_time .'  -  '. $profile->e_time}}</span>
+                            </li>
+                            <li>
                                 <span class="caption">Date of Birth</span>
                                 <span class="value">{{date('d-M-Y', strtotime($profile->dob))}}</span>
                             </li>

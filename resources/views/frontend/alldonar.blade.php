@@ -83,7 +83,7 @@
                     @foreach($donars as $row )
                     <div class="col-lg-6 col-md-12 col-sm-6">
                         <div class="donor-item has--link">
-                            <a href="donor/md-jeo/eyJpdiI6Ind6TVd6U2pZS3IvTSszanpacGZPNXc9PSIsInZhbHVlIjoiVWlXUWdEbVR0RnZwVGpuR0dPZ2lGQT09IiwibWFjIjoiNDMwZDY1ZDk3MjgxZGMxNTBlODI1Mzk2OTNmMjFlYWIxODlhMmU1OTMwMTAwZGMyYjRlMTcxN" class="item--link"></a>
+                            <a href="{{route('profile.user',['id'=>$row->id])}}" class="item--link"></a>
                             <div class="donor-item__thumb">
                                 <img onerror="this.src='{{asset('front/assets/images/donor/6108d83ae02901627969594.jpg')}}'"
                                     src="{{asset($row->img)}}" alt="image">
