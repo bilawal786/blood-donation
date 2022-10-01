@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth','rolee']], function() {
 
 
     Route::get('profile/user/{id}', [WebsiteController::class, 'userProfile'])->name('profile.user');
+    Route::post('user/update/profile', [WebsiteController::class, 'updateProfile'])->name('user.update.profile');
     Route::get('/user/dashboard', [WebsiteController::class, 'dashboard'])->name('user.dashboard');
     Route::post('/send/request', [WebsiteController::class, 'sendRequest'])->name('send.request');
 
