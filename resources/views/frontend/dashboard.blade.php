@@ -357,7 +357,39 @@
                         </div>
 
                         <div class="tab-pane fade" id="v-pills-profile" role="tabpanel"
-                             aria-labelledby="v-pills-profile-tab">...
+                             aria-labelledby="v-pills-profile-tab">
+                            <div class="myaccount-orders" style="width: 100%;">
+                                <h4 class="small-title" style="margin: 10px;"> Request Send </h4>
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <tbody>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Donor Name</th>
+                                            <th>Status</th>
+                                            <th>Created at</th>
+                                        </tr>
+                                        @foreach($request as $key=>$row)
+                                            <tr>
+                                                <td><a class="account-order-id"
+                                                       href="javascript:void(0)">{{$key+1}}</a></td>
+                                                <td>{{$row->donor->name}}</td>
+                                                    @if($row->status == '0')
+                                                    <td><span class="badge badge-danger">Pending Request</span></td>
+                                                    @else
+                                                    <td><span class="badge badge-success">Accept Request</span></td>
+                                                    @endif
+
+                                                <td>{{$row->created_at->format('d-m-y')}}</td>
+{{--                                                <td><a href="{{route('user.order-detail', ['id' => $row->id])}}"--}}
+{{--                                                       class="kenne-btn kenne-btn_sm"><span>View</span></a>--}}
+{{--                                                </td>--}}
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                         <div class="tab-pane fade" id="v-pills-messages" role="tabpanel"
                              aria-labelledby="v-pills-messages-tab">...
@@ -372,3 +404,9 @@
         </div>
     </div>
 @endsection
+<script>
+    import Specs from "../../../public/vendor/morrisjs/spec/specs.html";
+    export default {
+        components: {Specs}
+    }
+</script>

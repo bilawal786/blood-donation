@@ -43,7 +43,8 @@ class WebsiteController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        return view('frontend.dashboard', compact('user'));
+        $request = DoneeRequest::where('donee_id','=',$user->id)->orderBy('id', 'desc')->paginate(6);
+        return view('frontend.dashboard', compact('user','request'));
     }
 
     public function sendRequest(Request $request)
