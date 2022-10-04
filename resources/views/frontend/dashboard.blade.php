@@ -434,7 +434,7 @@
                                                     <tr>
                                                         <td><a class="account-order-id"
                                                                href="javascript:void(0)">{{$key+1}}</a></td>
-                                                        <td>{{$row->donor->name}}</td>
+                                                        <td>{{$row->donor->name??"Deleted"}}</td>
                                                         @if($row->status == '0')
                                                             <td><span class="badge badge-danger">Pending Request</span>
                                                             </td>
@@ -471,9 +471,9 @@
                                                         <td><a class="account-order-id"
                                                                href="javascript:void(0)">{{$key+1}}</a></td>
                                                         @if($user->role==1)
-                                                            <td>{{$row->donor->name}}</td>
+                                                            <td>{{$row->donor->name??"Deleted"}}</td>
                                                         @elseif($user->role==2)
-                                                            <td>{{$row->donee->name}}</td>
+                                                            <td>{{$row->donee->name??"Deleted"}}</td>
                                                         @endif
                                                         @if($row->status == '0')
                                                             <td><span class="badge badge-danger">Pending Request</span>
@@ -510,7 +510,7 @@
                                                     <tr>
                                                         <td><a class="account-order-id"
                                                                href="javascript:void(0)">{{$key+1}}</a></td>
-                                                        <td>{{$row->donee->name}}</td>
+                                                        <td>{{$row->donee->name??"Deleted"}}</td>
                                                         @if($row->status == '0')
                                                             <td><span class="badge badge-danger">Pending Request</span>
                                                             </td>
