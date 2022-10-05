@@ -14,12 +14,19 @@ class WebsiteController extends Controller
 {
     public function index()
     {
-        $users = User::where('role', '=', 2)->get();
-        $donnars = User::where('role', '=', 2)->take(10)->orderBy('id', 'desc')->get();
+        if (Auth::user()) {
+            $query = User::where('role', '=', 2)->where('id', '!=', Auth::user()->id);
+        } else {
+            $query = User::where('role', '=', 2);
+        }
+
+        $users = $query->get();
+        $donnars = $query->take(10)->orderBy('id', 'desc')->get();
         return view('frontend.index', compact('users', 'donnars'));
     }
 
-    public function map(){
+    public function map()
+    {
         $googleApiKey = env('GOOGLE_MAPS_API_KEY');
         $users = User::where('role', 2)->where('status', 0)->get();
         return view('frontend.map', compact('googleApiKey', 'users'));
@@ -27,10 +34,16 @@ class WebsiteController extends Controller
 
     public function allDonor($blod = null)
     {
-        if ($blod != null) {
-            $donars = User::where('role', '=', 2)->where('status', 0)->where('blood_group', '=', $blod)->orderBy('id', 'desc')->paginate(20);
+        $user = Auth::user();
+        if ($user) {
+            $query = User::where('role', '=', 2)->where('status', 0)->where('id', '!=', $user->id);
         } else {
-            $donars = User::where('role', '=', 2)->where('status', 0)->orderBy('id', 'desc')->paginate(20);
+            $query = User::where('role', '=', 2)->where('status', 0);
+        }
+        if ($blod != null) {
+            $donars = $query->where('blood_group', '=', $blod)->orderBy('id', 'desc')->paginate(20);
+        } else {
+            $donars = $query->orderBy('id', 'desc')->paginate(20);
         }
         return view('frontend.alldonar', compact('donars'));
     }
@@ -38,7 +51,7 @@ class WebsiteController extends Controller
     public function userProfile($id)
     {
         $profile = User::find($id);
-        $count = DoneeRequest::where('donor_id', '=', $id)->where('status', '=', '1')->count();
+        $count = DoneeRequest::where('donor_id', '=', $id)->where('status', '=', '3')->count();
         $currentDatee = date('Y-m-d');
         $currentDate = date('Y-m-d', strtotime($currentDatee));
         $date = date('Y-m-d', strtotime($profile->date ?? '12-2-2021'));
@@ -58,12 +71,23 @@ class WebsiteController extends Controller
         } else {
             $request = DoneeRequest::where('donor_id', '=', $user->id)->orderBy('id', 'desc')->paginate(6);
         }
-        return view('frontend.dashboard', compact('user', 'request'));
+        $count = DoneeRequest::where('donor_id', '=', $user->id)->where('status', '=', '3')->count();
+        return view('frontend.dashboard', compact('user', 'request', 'count'));
     }
 
     public function sendRequest(Request $request)
     {
         $user = Auth::user();
+        $check = DoneeRequest::where('donor_id', '=', $request->donor_id)->where('donee_id', '=', $user->id)->where('status', '=', 3)->first();
+
+        if ($check) {
+            $notification = array(
+                'messege' => ' You Can Not send again Request. ',
+                'alert-type' => 'info'
+            );
+            return redirect()->back()
+                ->with($notification);
+        }
         $doneeRequest = new DoneeRequest();
         $doneeRequest->donor_id = $request->donor_id;
         $doneeRequest->donee_id = $user->id;
@@ -82,11 +106,14 @@ class WebsiteController extends Controller
 
     public function donorSearch(Request $request)
     {
-        if ($request->gender != 3) {
-            $donars = User::where('role', '=', 2)->where('status', 0)->where('city', 'like', '%' . $request->city . '%')->where('blood_group', 'like', '%' . $request->blood_id . '%')->where('gender', '=', $request->gender)->orderBy('id', 'desc')->paginate(20);
-        } else {
-            $donars = User::where('role', '=', 2)->where('status', 0)->where('city', 'like', '%' . $request->city . '%')->where('blood_group', 'like', '%' . $request->blood_id . '%')->orderBy('id', 'desc')->paginate(20);
-        }
+
+        $donars = User::where(function ($query) use ($request) {
+            $query->orWhere('blood_group', '=', $request->blood_id)
+                ->orWhere('city', '=', $request->city)
+                ->orWhere('gender', '=', $request->gender);
+        })
+            ->where('role', 2)->where('status', 0)
+            ->paginate(10);
         return view('frontend.alldonar', compact('donars'));
     }
 
@@ -126,21 +153,35 @@ class WebsiteController extends Controller
             ->with($notification);
     }
 
-    public function donnerAccept($id)
+    public function donnerAccept($id, $status)
     {
         $request = DoneeRequest::find($id);
-        $request->status = 1;
+        $request->status = $status;
         $request->update();
-        $user = User::find($request->donor_id);
-        $user->date = Carbon::now()->addDays(90);
-        $user->update();
-        DoneeRequest::where('donor_id', '=', $id)->where('status', '=', 0)->update(['status' => 3]);
-        $notification = array(
-            'messege' => '  Request Accept  successfully ',
-            'alert-type' => 'success'
-        );
+        if ($status == 3) {
+            $user = User::find($request->donor_id);
+            $user->date = Carbon::now()->addDays(90);
+            $user->update();
+            DoneeRequest::where('donor_id', '=', $id)->where('status', '=', 0)->update(['status' => 3]);
+        }
+        if ($status == 1) {
+            $notification = array(
+                'messege' => '  Request Accept  successfully ',
+                'alert-type' => 'success'
+            );
+        } else {
+            $notification = array(
+                'messege' => '  Request Reject  successfully ',
+                'alert-type' => 'success'
+            );
+        }
         return redirect()->back()
             ->with($notification);
 
+    }
+
+    public function eligibility()
+    {
+        return view('frontend.egli');
     }
 }

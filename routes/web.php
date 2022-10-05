@@ -49,5 +49,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('user/update/profile', [WebsiteController::class, 'updateProfile'])->name('user.update.profile');
     Route::get('/user/dashboard', [WebsiteController::class, 'dashboard'])->name('user.dashboard');
     Route::post('/send/request', [WebsiteController::class, 'sendRequest'])->name('send.request');
-    Route::get('/donner/accept/{id}', [WebsiteController::class, 'donnerAccept'])->name('donner.accept');
+    Route::get('/donner/accept/{id}/{status}', [WebsiteController::class, 'donnerAccept'])->name('donner.accept');
+    Route::get('/eligibility', [WebsiteController::class, 'eligibility'])->name('eligibility');
 });

@@ -20,7 +20,7 @@
                             </div>
                             <div class="form-group col-lg-6">
                                 <label for="name">Name <sup class="text--danger">*</sup></label>
-                                <input type="text" name="name" id="name" value="" placeholder="Full name" class="form--control" maxlength="80" required="">
+                                <input type="text" name="name"  id="name" value="{{ old('name') }}" placeholder="Full name" class="form--control" maxlength="80" required="">
                                 @error('name')
                                 <h3 style="color: red">
                                     <strong>{{$message}}</strong>
@@ -29,7 +29,7 @@
                             </div>
                             <div class="form-group col-lg-6">
                                 <label for="email">Email <sup class="text--danger">*</sup></label>
-                                <input type="email" name="email" id="email" value="" placeholder="Enter Email" class="form--control" maxlength="60" required="">
+                                <input type="email" name="email" id="email" value="{{ old('email') }}" placeholder="Enter Email" class="form--control" maxlength="60" required="">
                                 @error('email')
                                 <h3 style="color: red">
                                     <strong>{{$message}}</strong>
@@ -38,15 +38,15 @@
                             </div>
                             <div class="form-group col-lg-6">
                                 <label for="phone">Phone <sup class="text--danger">*</sup></label>
-                                <input type="text" name="phone" id="phone" value="" placeholder="Enter Phone" class="form--control" maxlength="40" required="">
+                                <input type="text" name="phone" id="phone" value="{{ old('phone') }}" placeholder="Enter Phone" class="form--control" maxlength="40" required="">
                             </div>
                             <div class="form-group col-lg-6" id="address">
                                 <label for="address">Address <sup class="text--danger">*</sup></label>
-                                <input type="text" name="address" id="address" value="" placeholder="Enter Address" class="form--control" maxlength="255">
+                                <input type="text" name="address" id="address" value="{{ old('address') }}" placeholder="Enter Address" class="form--control" maxlength="255">
                             </div>
                             <div class="form-group col-lg-6" id="city">
                                 <label for="city">City <sup class="text--danger">*</sup></label>
-                                <select name="city" class="select" id="Location">
+                                <select name="city" class="select" id="Location" {{ old('city') }}>
                                     <option value="" disabled selected>Select The City</option>
                                     <option value="Islamabad">Islamabad</option>
                                     <option value="" disabled>Punjab Cities</option>
@@ -293,7 +293,7 @@
                             </div>
                             <div class="form-group col-lg-6" id="dob">
                                 <label for="date_birth">Date Of Birth <sup class="text--danger">*</sup></label>
-                                <input type="date" id="date_birth" name="dob" value="" data-language="en" class="form--control datepicker-here" maxlength="255" >
+                                <input type="date" id="date_birth" name="dob" value="{{ old('dob') }}" data-language="en" class="form--control datepicker-here" maxlength="255" >
                             </div>
                             <div class="form-group col-lg-6" id="blood_group">
                                 <label for="blood_id">Blood Group <sup class="text--danger">*</sup></label>
@@ -311,11 +311,11 @@
                             </div>
                             <div class="form-group col-lg-6" id="s_time">
                                 <label for="religion"> Preference Available Time From <sup class="text--danger">*</sup></label>
-                                <input type="time" name="s_time" id="s_time" value="" class="form--control"  >
+                                <input type="time" name="s_time" id="s_time" value="{{ old('s_time') }}" class="form--control"  >
                             </div>
                             <div class="form-group col-lg-6" id="e_time">
                                 <label for="religion"> Preference Available Time To <sup class="text--danger">*</sup></label>
-                                <input type="time" name="e_time" id="e_time" value="" class="form--control"  >
+                                <input type="time" name="e_time" id="e_time" value="{{ old('e_time') }}" class="form--control"  >
                             </div>
                             <div class="form-group col-lg-6" id="gender">
                                 <label >Gender <sup class="text--danger">*</sup></label>
@@ -327,7 +327,12 @@
                             </div>
                             <div class="form-group col-lg-6" id="weight">
                                 <label for="last_donate">Weight <sup class="text--danger">*</sup></label>
-                                <input type="number" name="weight" id="weight" value="" data-language="en" placeholder="Your Weight in KG" class="form--control datepicker-here">
+                                <input type="number" name="weight" id="weight" value="{{ old('weight') }}" data-language="en" placeholder="Your Weight in KG" class="form--control datepicker-here">
+                                @error('weight')
+                                <h3 style="color: red">
+                                    <strong>{{$message}}</strong>
+                                </h3>
+                                @enderror
                             </div>
                             <div class="form-group col-lg-6" id="image">
                                 <label for="file">Image <sup class="text--danger">*</sup></label>
@@ -337,7 +342,7 @@
                             </div>
                             <div class="form-group col-lg-6" id="weight">
                                 <label for="last_donate">Password <sup class="text--danger">*</sup></label>
-                                <input type="password" name="password" id="password" value="" data-language="en" placeholder="Password" class="form--control datepicker-here">
+                                <input type="password" name="password" id="password" value="{{ old('password') }}" data-language="en" placeholder="Password" class="form--control datepicker-here">
                                 @error('password')
                                 <h3 style="color: red">
                                     <strong>{{$message}}</strong>
@@ -346,12 +351,12 @@
                             </div>
                             <div class="form-group col-lg-6" id="weight">
                                 <label for="last_donate">Confirm Password <sup class="text--danger">*</sup></label>
-                                <input type="password" name="password_confirmation" id="weight" value="" data-language="en" placeholder="Password" class="form--control datepicker-here">
+                                <input type="password" name="password_confirmation" id="weight" value="{{ old('password_confirmation') }}" data-language="en" placeholder="Password" class="form--control datepicker-here">
 
                             </div>
                             <div class="form-group col-lg-12">
                                 <label for="about_details">About You <sup class="text--danger">*</sup></label>
-                                <textarea name="about" id="about_details" placeholder="Enter Details" class="form--control"></textarea>
+                                <textarea name="about" id="about_details" placeholder="Enter Details" class="form--control">{{ old('about') }}</textarea>
                             </div>
                         </div>
 

@@ -19,8 +19,8 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone')->nullable();
             $table->text('dob')->nullable();
-            $table->text('gender')->nullable();
-            $table->text('blood_group')->nullable();
+            $table->string('gender')->nullable();
+            $table->string('blood_group')->nullable();
             $table->text('weight')->nullable();
             $table->text('address')->nullable();
             $table->string('lat')->nullable();

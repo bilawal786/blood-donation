@@ -44,41 +44,42 @@
                                     data-bs-target="#v-pills-home" role="tab" aria-controls="v-pills-home"
                                     aria-selected="true">Profile
                             </button>
-                            @if($user->role==1)
+
                                 <button class="nav-link" style="width: 280px;" id="v-pills-profile-tab"
                                         data-bs-toggle="pill"
                                         data-bs-target="#v-pills-profile" type="button" role="tab"
                                         aria-controls="v-pills-profile" aria-selected="false">My Requests
                                 </button>
-                            @elseif($user->role==2)
+
                                 <button class="nav-link" style="width: 280px;" id="v-pills-profilee-tab"
                                         data-bs-toggle="pill"
                                         data-bs-target="#v-pills-profilee" type="button" role="tab"
                                         aria-controls="v-pills-profilee" aria-selected="false">Blood Donate Requests
                                 </button>
-                            @endif
+
                             <button class="nav-link" style="width: 280px;" id="v-pills-messages-tab"
                                     data-bs-toggle="pill"
                                     data-bs-target="#v-pills-messages" type="button" role="tab"
                                     aria-controls="v-pills-messages" aria-selected="false">Accept Request
                             </button>
-
-                            <button class="nav-link" style="width: 280px;" id="v-pills-settings-tab"
+                            <button class="nav-link" style="width: 280px;" id="v-pills-reject-tab"
                                     data-bs-toggle="pill"
-                                    data-bs-target="#v-pills-settings" type="button" role="tab"
-                                    aria-controls="v-pills-settings" aria-selected="false"><a href="{{route('logout')}}"
-                                                                                              onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();"
-                                >
-                                    <p>
-                                        Logout
-                                    </p>
-                                </a>
-                                <form id="logout-form" action="{{ route('logout') }}" method="POST"
-                                      style="display: none;">
-                                    @csrf
-                                </form>
+                                    data-bs-target="#v-pills-reject" type="button" role="tab"
+                                    aria-controls="v-pills-reject" aria-selected="false">Reject Request
                             </button>
+
+{{--                            <button class="nav-link" style="width: 280px;" id="v-pills-settings-tab"--}}
+{{--                                    data-bs-toggle="pill"--}}
+{{--                                    data-bs-target="#v-pills-settings" type="button" role="tab"--}}
+{{--                                    aria-controls="v-pills-settings" aria-selected="false"><a href="{{route('logout')}}"--}}
+{{--                                                                                              onclick="event.preventDefault();--}}
+{{--                                                     document.getElementById('logout-form').submit();"><p>Logout</p>--}}
+{{--                                </a>--}}
+{{--                                <form id="logout-form" action="{{ route('logout') }}" method="POST"--}}
+{{--                                      style="display: none;">--}}
+{{--                                    @csrf--}}
+{{--                                </form>--}}
+{{--                            </button>--}}
                         </div>
                         <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel"
@@ -428,21 +429,35 @@
                                                 <th>Donor Name</th>
                                                 <th>Status</th>
                                                 <th>Created at</th>
+                                                <th>Action</th>
                                             </tr>
                                             @foreach($request as $key=>$row)
-                                                @if($row->status==0)
+                                                @if($row->status==0 || $row->status==1 )
                                                     <tr>
                                                         <td><a class="account-order-id"
                                                                href="javascript:void(0)">{{$key+1}}</a></td>
                                                         <td>{{$row->donor->name??"Deleted"}}</td>
                                                         @if($row->status == '0')
-                                                            <td><span class="badge badge-danger">Pending Request</span>
+                                                            <td><span class="badge badge-warning">Pending Request by  Donnor</span>
                                                             </td>
-                                                        @else
+                                                        @elseif($row->status == '1')
+                                                            <td><span class="badge badge-success">Pending Request by Donee</span>
+                                                            </td>
+                                                        @elseif($row->status == '2')
+                                                            <td><span class="badge badge-danger">Reject Request</span>
+                                                            </td>
+                                                        @elseif($row->status == '3')
                                                             <td><span class="badge badge-success">Accept Request</span>
                                                             </td>
                                                         @endif
                                                         <td>{{$row->created_at->format('d-m-y')}}</td>
+                                                       <td> <a href="{{route('donner.accept',['id'=>$row->id,'status'=>2])}}"
+                                                               class="btn btn-danger"><span>Reject</span></a>
+                                                           @if($row->status == '1')
+                                                           <a href="{{route('donner.accept',['id'=>$row->id,'status'=>3])}}"
+                                                              class="btn btn-success"><span>Accept</span></a>
+                                                           @endif
+                                                       </td>
 
                                                     </tr>
                                                 @endif
@@ -461,12 +476,16 @@
                                             <tbody>
                                             <tr>
                                                 <th>#</th>
-                                                <th>Donor Name</th>
+                                                @if($user->role==1)
+                                                    <th>Donor Name</th>
+                                                @else
+                                                    <th>Donee Name</th>
+                                                @endif
                                                 <th>Status</th>
                                                 <th>Created at</th>
                                             </tr>
                                             @foreach($request as $key=>$row)
-                                                @if($row->status==1)
+                                                @if($row->status==3)
                                                     <tr>
                                                         <td><a class="account-order-id"
                                                                href="javascript:void(0)">{{$key+1}}</a></td>
@@ -476,13 +495,69 @@
                                                             <td>{{$row->donee->name??"Deleted"}}</td>
                                                         @endif
                                                         @if($row->status == '0')
-                                                            <td><span class="badge badge-danger">Pending Request</span>
+                                                            <td><span class="badge badge-warning">Pending Request by  Donnor</span>
                                                             </td>
-                                                        @else
+                                                        @elseif($row->status == '1')
+                                                            <td><span class="badge badge-success">Pending Request by Donee</span>
+                                                            </td>
+                                                        @elseif($row->status == '2')
+                                                            <td><span class="badge badge-danger">Reject Request</span>
+                                                            </td>
+                                                        @elseif($row->status == '3')
                                                             <td><span class="badge badge-success">Accept Request</span>
                                                             </td>
                                                         @endif
                                                         <td>{{$row->created_at->format('d-m-y')}}</td>
+                                                    </tr>
+                                                @endif
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-reject" role="tabpanel"
+                                 aria-labelledby="v-pills-reject-tab">
+                                <div class="myaccount-orders" style="width: 100%;">
+                                    <h4 class="small-title" style="margin: 10px;"> Reject Requests </h4>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover">
+                                            <tbody>
+                                            <tr>
+                                                <th>#</th>
+                                                @if($user->role==1)
+                                                <th>Donor Name</th>
+                                                @else
+                                                <th>Donee Name</th>
+                                                @endif
+                                                <th>Status</th>
+                                                <th>Created at</th>
+                                            </tr>
+                                            @foreach($request as $key=>$row)
+                                                @if($row->status==2)
+                                                    <tr>
+                                                        <td><a class="account-order-id"
+                                                               href="javascript:void(0)">{{$key+1}}</a></td>
+                                                        @if($user->role==1)
+                                                            <td>{{$row->donor->name??"Deleted"}}</td>
+                                                        @elseif($user->role==2)
+                                                            <td>{{$row->donee->name??"Deleted"}}</td>
+                                                        @endif
+                                                        @if($row->status == '0')
+                                                            <td><span class="badge badge-warning">Pending Request by  Donnor</span>
+                                                            </td>
+                                                        @elseif($row->status == '1')
+                                                            <td><span class="badge badge-success">Pending Request by Donee</span>
+                                                            </td>
+                                                        @elseif($row->status == '2')
+                                                            <td><span class="badge badge-danger">Reject Request</span>
+                                                            </td>
+                                                        @elseif($row->status == '3')
+                                                            <td><span class="badge badge-success">Accept Request</span>
+                                                            </td>
+                                                        @endif
+                                                        <td>{{$row->created_at->format('d-m-y')}}</td>
+
                                                     </tr>
                                                 @endif
                                             @endforeach
@@ -506,22 +581,35 @@
                                                 <th>Action</th>
                                             </tr>
                                             @foreach($request as $key=>$row)
-                                                @if($row->status==0)
+
+                                                @if($row->status==0 || $row->status==1 )
                                                     <tr>
                                                         <td><a class="account-order-id"
                                                                href="javascript:void(0)">{{$key+1}}</a></td>
                                                         <td>{{$row->donee->name??"Deleted"}}</td>
                                                         @if($row->status == '0')
-                                                            <td><span class="badge badge-danger">Pending Request</span>
+                                                            <td><span class="badge badge-warning">Pending Request by  Donnor</span>
                                                             </td>
-                                                        @else
+                                                        @elseif($row->status == '1')
+                                                            <td><span class="badge badge-success">Pending Request by Donee</span>
+                                                            </td>
+                                                        @elseif($row->status == '2')
+                                                            <td><span class="badge badge-danger">Reject Request</span>
+                                                            </td>
+                                                        @elseif($row->status == '3')
                                                             <td><span class="badge badge-success">Accept Request</span>
                                                             </td>
                                                         @endif
 
                                                         <td>{{$row->created_at->format('d-m-y')}}</td>
-                                                        <td><a href="{{route('donner.accept',['id'=>$row->id])}}"
-                                                               class="btn btn-danger"><span>Accept</span></a>
+                                                        <td>
+                                                            @if($row->status == '0')
+                                                            <a href="{{route('donner.accept',['id'=>$row->id,'status'=>1])}}"
+                                                               class="btn btn-success"><span>Accept</span></a>
+                                                            @endif
+
+                                                            <a href="{{route('donner.accept',['id'=>$row->id,'status'=>2])}}"
+                                                               class="btn btn-danger"><span>Reject</span></a>
                                                         </td>
                                                     </tr>
                                                 @endif
@@ -531,9 +619,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane fade" id="v-pills-settings" role="tabpanel"
-                                 aria-labelledby="v-pills-settings-tab">...
-                            </div>
+
                         </div>
                     </div>
                 </div>

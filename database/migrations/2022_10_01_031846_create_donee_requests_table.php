@@ -18,7 +18,7 @@ class CreateDoneeRequestsTable extends Migration
             $table->string('donee_id')->nullable();
             $table->string('donor_id')->nullable();
             $table->string('name')->nullable();
-            $table->string('status')->default(0); //0=no accept //1 Accept
+            $table->string('status')->default(0); //0=no accept //1 pending //2 Reject //3 Accept
             $table->string('email')->nullable();
             $table->longText('message')->nullable();
             $table->timestamps();

@@ -19,7 +19,7 @@
                                     </div>
                                     @error('email')
                                     <h3 style="color: red">
-                                        <strong>{{$message}}</strong>
+                                        <strong style="font-size: 15px;">{{$message}}</strong>
                                     </h3>
                                     @enderror
                                     <div class="form-group col-xl-12">
@@ -29,7 +29,7 @@
                                     </div>
                                     @error('password')
                                     <h3 style="color: red">
-                                        <strong>{{$message}}</strong>
+                                        <strong style="color: red">{{$message}}</strong>
                                     </h3>
                                     @enderror
                                     <div class="col-lg-12">

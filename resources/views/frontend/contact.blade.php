@@ -44,7 +44,7 @@
                                         <i class="las la-envelope"></i>
                                     </div>
                                     <div class="single-info__content">
-                                        <p><a href="https://script.viserlab.com/cdn-cgi/l/email-protection#fa9e9f9795ba9d979b9396d4999597"><span class="__cf_email__" data-cfemail="dabebfb7b59abdb7bbb3b6f4b9b5b7">[email&#160;protected]</span></a></p>
+                                        <p><a href="/"><span class="__cf_email__" data-cfemail="dabebfb7b59abdb7bbb3b6f4b9b5b7">[email&#160;protected]</span></a></p>
                                     </div>
                                 </li>
 

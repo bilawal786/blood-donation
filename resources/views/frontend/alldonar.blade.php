@@ -7,7 +7,7 @@
                 <div class="col-lg-6 text-center">
                     <h2 class="page-title text-white">All Donor</h2>
                     <ul class="page-breadcrumb justify-content-center">
-                        <li><a href="https://script.viserlab.com/bloodlab">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li>All Donor</li>
                     </ul>
                 </div>
@@ -21,8 +21,8 @@
                 @csrf
                 <div class="donor-search-form__field">
                     <label>Blood Group</label>
-                    <select class="select" name="blood_id">
-                        <option value="" selected="" disabled="">Select Group</option>
+                    <select class="form--control" name="blood_id">
+                        <option  >Select Group</option>
                         <option value="B+">B+</option>
                         <option value="A+">A+</option>
                         <option value="AB+">AB+</option>
@@ -36,13 +36,13 @@
 
                 <div class="donor-search-form__field">
                     <label>City</label>
-                    <select class="select" name="city">
-                        <option value="" disabled="" selected="">Select One</option>
+                    <select class="form--control" name="city">
+                        <option >Select One</option>
                         <option value="Islamabad"
                                 data-locations="[{&quot;id&quot;:15,&quot;name&quot;:&quot;Chisworth&quot;,&quot;city_id&quot;:9,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2021-08-01T00:36:11.000000Z&quot;,&quot;updated_at&quot;:&quot;2021-08-01T00:36:11.000000Z&quot;}]">
                             Islamabad
                         </option>
-                        <option value="" disabled>Punjab Cities</option>
+
                         <option value="Ahmed Nager Chatha"
                                 data-locations="[{&quot;id&quot;:15,&quot;name&quot;:&quot;Chisworth&quot;,&quot;city_id&quot;:9,&quot;status&quot;:1,&quot;created_at&quot;:&quot;2021-08-01T00:36:11.000000Z&quot;,&quot;updated_at&quot;:&quot;2021-08-01T00:36:11.000000Z&quot;}]">
                             Ahmed Nager Chatha
@@ -149,7 +149,6 @@
                         <option value="Vehari">Vehari</option>
                         <option value="Wah Cantonment">Wah Cantonment</option>
                         <option value="Wazirabad">Wazirabad</option>
-                        <option value="" disabled>Sindh Cities</option>
                         <option value="Badin">Badin</option>
                         <option value="Bhirkan">Bhirkan</option>
                         <option value="Rajo Khanani">Rajo Khanani</option>
@@ -206,7 +205,7 @@
                         <option value="Thatta">Thatta</option>
                         <option value="Umerkot">Umerkot</option>
                         <option value="Warah">Warah</option>
-                        <option value="" disabled>Khyber Cities</option>
+
                         <option value="Abbottabad">Abbottabad</option>
                         <option value="Adezai">Adezai</option>
                         <option value="Alpuri">Alpuri</option>
@@ -253,7 +252,6 @@
                         <option value="Thall">Thall</option>
                         <option value="Timergara">Timergara</option>
                         <option value="Tordher">Tordher</option>
-                        <option value="" disabled>Balochistan Cities</option>
                         <option value="Awaran">Awaran</option>
                         <option value="Barkhan">Barkhan</option>
                         <option value="Chagai">Chagai</option>
@@ -291,8 +289,8 @@
                 </div>
                 <div class="donor-search-form__field">
                     <label>Donor Type</label>
-                    <select class="select" name="gender">
-                        <option value="" selected="" disabled="">Select One</option>
+                    <select class="form--control" name="gender">
+                        <option     >Select One</option>
                         <option value="1">Male</option>
                         <option value="2">Female</option>
                     </select>
@@ -311,6 +309,7 @@
                 <div class="col-xl-12 col-lg-12 col-md-12">
                     <div class="row gy-4">
                         @foreach($donars as $row )
+                            @if($row->role==2)
                             <div class="col-lg-6 col-md-12 col-sm-6">
                                 <div class="donor-item has--link">
                                     <a href="{{route('profile.user',['id'=>$row->id])}}" class="item--link"></a>
@@ -334,6 +333,7 @@
                                     </div>
                                 </div>
                             </div>
+                            @endif
                         @endforeach
                         {{$donars->links()}}
                     </div>

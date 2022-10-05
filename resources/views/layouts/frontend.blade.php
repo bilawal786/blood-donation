@@ -126,6 +126,7 @@
                         </li>
                     </ul>
                 </div>
+
             </div>
         </div>
     </div>
@@ -149,14 +150,35 @@
                             @if(Auth::user()->role == 1)
                                 <li><a href="{{route('front.map')}}">Map</a></li>
                             @endif
+                                @if(Auth::user()->role == 2)
+                                    <li><a href="{{route('eligibility')}}">Eligibility</a></li>
+                                @endif
                         @endauth
                         <li><a href="{{route('contact')}}">Contact</a></li>
                     </ul>
                     @auth
                         <div style="padding-left: 1.125rem;" class="nav-right">
-                            <a href="{{route('user.dashboard')}}"
-                               class="btn btn-md btn--base d-flex align-items-center"><i
-                                    class="las la-user fs--18px me-2"></i> Dashboard</a>
+{{--                            <a href="{{route('user.dashboard')}}"--}}
+{{--                               class="btn btn-md btn--base d-flex align-items-center"><i--}}
+{{--                                    class="las la-user fs--18px me-2"></i> Dashboard</a>--}}
+                            <!-- Example single danger button -->
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-md btn--base d-flex align-items-center dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <img src="{{asset(Auth::user()->img)}}" style="width:35px; border-radius: 48px;">
+                                    <b style="padding: 0px 10px;">My Account</b>
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a class="dropdown-item" href="{{route('user.dashboard')}}">My Profile</a>
+                                    <a class="dropdown-item" href="{{route('logout')}}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();"><p>Logout</p>
+                                    </a>
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST"
+                                          style="display: none;">
+                                        @csrf
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     @else
                         <div class="nav-right">

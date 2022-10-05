@@ -17,7 +17,7 @@
                         <div class="input-field">
                             <i class="las la-tint"></i>
                             <select name="blood_id">
-                                <option value="" selected="" disabled="">Select Blood Group</option>
+                                <option value="">Select Blood Group</option>
                                 <option value="B+">B+</option>
                                 <option value="A+">A+</option>
                                 <option value="AB+">AB+</option>
@@ -28,14 +28,13 @@
                                 <option value="O-">O-</option>
                             </select>
                         </div>
-                        <input type="hidden" value="3" name="gender">
+
                         <div class="input-field">
                             <i class="las la-city"></i>
                             <select name="city">
-                                <option value="" selected="" disabled="">Select City</option>
+                                <option value="" >Select City</option>
                                 <option value="Islamabad">Islamabad</option>
                                 <option value="lahore">Lahore</option>
-                                <option value="" disabled>Punjab Cities</option>
                                 <option value="Ahmed Nager Chatha">Ahmed Nager Chatha</option>
                                 <option value="Ahmadpur East">Ahmadpur East</option>
                                 <option value="Ali Khan Abad">Ali Khan Abad</option>
@@ -138,7 +137,6 @@
                                 <option value="Vehari">Vehari</option>
                                 <option value="Wah Cantonment">Wah Cantonment</option>
                                 <option value="Wazirabad">Wazirabad</option>
-                                <option value="" disabled>Sindh Cities</option>
                                 <option value="Badin">Badin</option>
                                 <option value="Bhirkan">Bhirkan</option>
                                 <option value="Rajo Khanani">Rajo Khanani</option>
@@ -195,7 +193,6 @@
                                 <option value="Thatta">Thatta</option>
                                 <option value="Umerkot">Umerkot</option>
                                 <option value="Warah">Warah</option>
-                                <option value="" disabled>Khyber Cities</option>
                                 <option value="Abbottabad">Abbottabad</option>
                                 <option value="Adezai">Adezai</option>
                                 <option value="Alpuri">Alpuri</option>
@@ -242,7 +239,6 @@
                                 <option value="Thall">Thall</option>
                                 <option value="Timergara">Timergara</option>
                                 <option value="Tordher">Tordher</option>
-                                <option value="" disabled>Balochistan Cities</option>
                                 <option value="Awaran">Awaran</option>
                                 <option value="Barkhan">Barkhan</option>
                                 <option value="Chagai">Chagai</option>
@@ -454,7 +450,11 @@
                         </div>
                         <div class="donor-card__content">
                             <h6 class="donor-card__name">{{$row->name}}</h6>
-                            <p class="fs--14px text-white">Blood Group : <span class="text--base">({{$row->blood_group}})</span></p>
+                            <p class="fs--14px text-white">Blood Group : <span class="text--base">({{$row->blood_group}})</span><br>
+                                Email : <span class="text--base">({{$row->email}})</span><br>
+                                Phone : <span class="text--base">({{$row->phone}})</span><br>
+                                City : <span class="text--base">({{$row->city}})</span><br>
+                            </p>
 
                         </div>
                     </div>
@@ -613,7 +613,13 @@
                         </div>
                         <div class="donor-card__content">
                             <h6 class="donor-card__name">{{$row->name}}</h6>
-                            <p class="text-white fs--14px">Blood Group : ({{$row->blood_group}})</p>
+                            <p class="text-white fs--14px">
+                                Blood Group : ({{$row->blood_group}})<br>
+                                Email : {{$row->email}}<br>
+                                Phone : {{$row->phone}}<br>
+                                City : {{$row->city}}<br>
+
+                            </p>
                             @php
                                 $count = \App\Models\DoneeRequest::where('donor_id', '=', $row->id)->where('status', '=', '1')->count();
                             @endphp
