@@ -150,10 +150,11 @@
                             @if(Auth::user()->role == 1)
                                 <li><a href="{{route('front.map')}}">Map</a></li>
                             @endif
-                                @if(Auth::user()->role == 2)
-                                    <li><a href="{{route('eligibility')}}">Eligibility</a></li>
-                                @endif
+
                         @endauth
+
+                            <li><a href="{{route('eligibility')}}">Eligibility</a></li>
+
                         <li><a href="{{route('contact')}}">Contact</a></li>
                     </ul>
                     @auth
