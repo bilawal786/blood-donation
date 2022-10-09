@@ -21,7 +21,7 @@ class WebsiteController extends Controller
         }
 
         $users = $query->get();
-        $donnars = $query->take(10)->orderBy('id', 'desc')->get();
+        $donnars = $query->take(4)->orderBy('id', 'desc')->get();
         return view('frontend.index', compact('users', 'donnars'));
     }
 
@@ -66,42 +66,38 @@ class WebsiteController extends Controller
     public function dashboard()
     {
         $user = Auth::user();
-        if ($user->role == 1) {
-            $request = DoneeRequest::where('donee_id', '=', $user->id)->orderBy('id', 'desc')->paginate(6);
-        } else {
-            $request = DoneeRequest::where('donor_id', '=', $user->id)->orderBy('id', 'desc')->paginate(6);
-        }
-        $count = DoneeRequest::where('donor_id', '=', $user->id)->where('status', '=', '3')->count();
-        return view('frontend.dashboard', compact('user', 'request', 'count'));
+        $donneRequest = DoneeRequest::where('donee_id', '=', $user->id)->orderBy('id', 'desc')->paginate(6);
+        $donarRequest = DoneeRequest::where('donor_id', '=', $user->id)->orderBy('id', 'desc')->paginate(6);
+        return view('frontend.dashboard', compact('user', 'donarRequest', 'donneRequest'));
     }
 
     public function sendRequest(Request $request)
     {
         $user = Auth::user();
-        $check = DoneeRequest::where('donor_id', '=', $request->donor_id)->where('donee_id', '=', $user->id)->where('status', '=', 3)->first();
-
+        $check = DoneeRequest::where('donor_id', '=', $request->donor_id)->where('donee_id', '=', $user->id)->where('status', 0)->first();
         if ($check) {
             $notification = array(
-                'messege' => ' You Can Not send again Request. ',
+                'messege' => ' You cannot send request again. You already send a request please wait for the donor response.',
                 'alert-type' => 'info'
             );
             return redirect()->back()
                 ->with($notification);
+        } else {
+            $doneeRequest = new DoneeRequest();
+            $doneeRequest->donor_id = $request->donor_id;
+            $doneeRequest->donee_id = $user->id;
+            $doneeRequest->name = $request->name ?? "";
+            $doneeRequest->email = $request->email ?? "";
+            $doneeRequest->message = $request->message;
+            $doneeRequest->status = 0;
+            $doneeRequest->save();
+            $notification = array(
+                'messege' => '  Request Send successfully ',
+                'alert-type' => 'success'
+            );
+            return redirect()->back()
+                ->with($notification);
         }
-        $doneeRequest = new DoneeRequest();
-        $doneeRequest->donor_id = $request->donor_id;
-        $doneeRequest->donee_id = $user->id;
-        $doneeRequest->name = $request->name ?? "";
-        $doneeRequest->email = $request->email ?? "";
-        $doneeRequest->message = $request->message;
-        $doneeRequest->save();
-        $notification = array(
-            'messege' => '  Request Send successfully ',
-            'alert-type' => 'success'
-        );
-        return redirect()->back()
-            ->with($notification);
-
     }
 
     public function donorSearch(Request $request)
