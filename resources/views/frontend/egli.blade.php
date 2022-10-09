@@ -1,7 +1,7 @@
 @extends('layouts.frontend')
 @section('content')
     <div class="main-wrapper">
-        <section class="inner-hero bg_img overlay--one" style="background-image: url({{asset('assets/images/frontend/breadcrumb/61023f89990b81627537289.jpg')}});">
+        <!-- <section class="inner-hero bg_img overlay--one" style="background-image: url({{asset('assets/images/frontend/breadcrumb/61023f89990b81627537289.jpg')}});">
             <div class="container">
                 <div class="row justify-content-center">
                     <div class="col-lg-6 text-center">
@@ -13,7 +13,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
         <section class="pt-100 pb-100 position-relative z-index shade--bg">
             <div class="container">
                 <div class="row justify-content-center">

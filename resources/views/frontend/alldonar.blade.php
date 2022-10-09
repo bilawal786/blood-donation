@@ -1,19 +1,6 @@
 @extends('layouts.frontend')
 @section('content')
-    <section class="inner-hero bg_img overlay--one"
-             style="background-image: url({{asset('assets/images/frontend/breadcrumb/61023f89990b81627537289.jpg')}});">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-6 text-center">
-                    <h2 class="page-title text-white">All Donor</h2>
-                    <ul class="page-breadcrumb justify-content-center">
-                        <li><a href="/">Home</a></li>
-                        <li>All Donor</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </section>
+    <!-- <section class-->
     <div class="donor-search-area">
         <div class="container">
             <form method="post" action="{{route('donor.search')}}" class="donor-search-form">

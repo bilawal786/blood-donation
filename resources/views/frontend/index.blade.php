@@ -3,11 +3,13 @@
 <div class="main-wrapper">
 
     <section class="hero bg_img"
-             style="background-image: url({{asset('front/assets/images/frontend/banner/60fffe430ffba1627389507.jpg')}});">
+             style="background-image: url({{asset('front/assets/images/frontend/banner/bd6.jpg')}});">
+    <!-- <section class="hero bg_img"
+             style="background-image: url({{asset('front/assets/images/frontend/banner/60fffe430ffba1627389507.jpg')}});"> -->
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-xxl-6 col-xl-7 col-lg-8 text-center">
-                    <h2 class="hero__title">A lot of things hurt. Saving lives doesn&#039;t have to</h2>
+                    <h2 class="hero__title">“Saving One Life Is As If Saving Whole Of Humanity…” – Quran 5:32”</h2>
                 </div>
             </div>
             <div class="row justify-content-center mt-4">
@@ -15,7 +17,8 @@
                     <form method="post" action="{{route('donor.search')}}" class="hero__blood-search-form">
                         @csrf
                         <div class="input-field">
-                            <i class="las la-tint"></i>
+                            <!-- <i class="las la-tint"></i> -->
+                            <i class=""></i>
                             <select name="blood_id">
                                 <option value="">Select Blood Group</option>
                                 <option value="B+">B+</option>
@@ -30,7 +33,8 @@
                         </div>
 
                         <div class="input-field">
-                            <i class="las la-city"></i>
+                            <i class=""></i>
+                            <!-- <i class="las la-city"></i> -->
                             <select name="city">
                                 <option value="" >Select City</option>
                                 <option value="Islamabad">Islamabad</option>
@@ -274,7 +278,8 @@
                             </select>
                         </div>
                         <div class="btn-area">
-                            <button type="submit" class="btn btn-md btn--base"><i class="las la-search"></i> Search
+                            <!-- <button type="submit" class="btn btn-md btn--base"><i class="las la-search"></i> Search -->
+                            <button type="submit" class="btn btn-md btn--base"><i class=""></i> Search
                             </button>
                         </div>
                     </form>
@@ -284,9 +289,9 @@
     </section>
 
     <section class="pt-80 pb-80 position-relative z-index-2 overflow-hidden">
-        <div class="top-el-bg">
+        <!-- <div class="top-el-bg">
             <img src="{{asset('front/assets/images/frontend/blood/60fff77d8bf601627387773.png')}}" alt="image">
-        </div>
+        </div> -->
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-lg-6 text-center">
@@ -301,7 +306,8 @@
                     <div class="avaiable-blood-single has--link">
                         <a href="{{route('all.donor',['blod'=>'B+'])}}"
                            class="item--link"></a>
-                        <h6 class="avaiable-blood-single__name"><i class="las la-tint"></i>B+</h6>
+                        <!-- <h6 class="avaiable-blood-single__name"><i class="las la-tint"></i>B+</h6> -->
+                        <h6 class="avaiable-blood-single__name"><i class=""></i>B+</h6>
                         <span class="avaiable-blood-single__amount">{{$users->where('blood_group','=','B+')->count()}}</span>
                     </div>
                 </div>
@@ -309,7 +315,7 @@
                     <div class="avaiable-blood-single has--link">
                         <a href="{{route('all.donor',['blod'=>'A+'])}}"
                            class="item--link"></a>
-                        <h6 class="avaiable-blood-single__name"><i class="las la-tint"></i>A+</h6>
+                        <h6 class="avaiable-blood-single__name"><i class=""></i>A+</h6>
                         <span class="avaiable-blood-single__amount">{{$users->where('blood_group','=','A+')->count()}}</span>
                     </div>
                 </div>
@@ -317,7 +323,7 @@
                     <div class="avaiable-blood-single has--link">
                         <a href="{{route('all.donor',['blod'=>'AB+'])}}"
                            class="item--link"></a>
-                        <h6 class="avaiable-blood-single__name"><i class="las la-tint"></i>AB+</h6>
+                        <h6 class="avaiable-blood-single__name"><i class=""></i>AB+</h6>
                         <span class="avaiable-blood-single__amount">{{$users->where('blood_group','=','AB+')->count()}}</span>
                     </div>
                 </div>
@@ -325,7 +331,7 @@
                     <div class="avaiable-blood-single has--link">
                         <a href="{{route('all.donor',['blod'=>'O+'])}}"
                            class="item--link"></a>
-                        <h6 class="avaiable-blood-single__name"><i class="las la-tint"></i>O+</h6>
+                        <h6 class="avaiable-blood-single__name"><i class=""></i>O+</h6>
                         <span class="avaiable-blood-single__amount">{{$users->where('blood_group','=','O+')->count()}}</span>
                     </div>
                 </div>
@@ -333,7 +339,7 @@
                     <div class="avaiable-blood-single has--link">
                         <a href="{{route('all.donor',['blod'=>'A-'])}}"
                            class="item--link"></a>
-                        <h6 class="avaiable-blood-single__name"><i class="las la-tint"></i>A-</h6>
+                        <h6 class="avaiable-blood-single__name"><i class=""></i>A-</h6>
                         <span class="avaiable-blood-single__amount">{{$users->where('blood_group','=','A-')->count()}}</span>
                     </div>
                 </div>
@@ -341,7 +347,7 @@
                     <div class="avaiable-blood-single has--link">
                         <a href="{{route('all.donor',['blod'=>'B-'])}}"
                            class="item--link"></a>
-                        <h6 class="avaiable-blood-single__name"><i class="las la-tint"></i>B-</h6>
+                        <h6 class="avaiable-blood-single__name"><i class=""></i>B-</h6>
                         <span class="avaiable-blood-single__amount">{{$users->where('blood_group','=','B-')->count()}}</span>
                     </div>
                 </div>
@@ -349,7 +355,7 @@
                     <div class="avaiable-blood-single has--link">
                         <a href="{{route('all.donor',['blod'=>'AB-'])}}"
                            class="item--link"></a>
-                        <h6 class="avaiable-blood-single__name"><i class="las la-tint"></i>AB-</h6>
+                        <h6 class="avaiable-blood-single__name"><i class=""></i>AB-</h6>
                         <span class="avaiable-blood-single__amount">{{$users->where('blood_group','=','AB-')->count()}}</span>
                     </div>
                 </div>
@@ -357,36 +363,37 @@
                     <div class="avaiable-blood-single has--link">
                         <a href="{{route('all.donor',['blod'=>'O-'])}}"
                            class="item--link"></a>
-                        <h6 class="avaiable-blood-single__name"><i class="las la-tint"></i>O-</h6>
+                        <h6 class="avaiable-blood-single__name"><i class=""></i>O-</h6>
                         <span class="avaiable-blood-single__amount">{{$users->where('blood_group','=','O-')->count()}}</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <section class="pt-100 pb-100 shade--bg">
+    <section class="pt-100 pb-100 bg-light">
         <div class="container">
             <div class="row gy-5">
                 <div class="col-lg-6">
                     <div class="about-thumb">
-                        <a class="play-btn" href="https://www.youtube.com/embed/WOb4cj7izpE"
-                           data-rel="lightcase:myCollection"><i class="las la-play"></i></a>
-                        <img src="{{asset('front/assets/images/frontend/about/60fff7dc7c1141627387868.jpg')}}"
+                        <!-- <a class="play-btn" href="https://www.youtube.com/embed/WOb4cj7izpE"
+                           data-rel="lightcase:myCollection"><i class="las la-play"></i></a> -->
+                        <img src="{{asset('front/assets/images/frontend/about/bd1.jpg')}}"
                              alt="image" class="w-100 h-100">
                     </div>
                 </div>
 
                 <div class="col-lg-6 ps-lg-5">
                     <div class="section-header mb-5 text-sm-start text-center">
-                        <h2 class="section-title">Why BloodLab</h2>
-                        <p>Omnis harum qui vel repudiandae officiis nemo perferendis libero soluta consequuntur culpa,
-                            laborum facere, fugiat totam ratione.</p>
+                        <h2 class="section-title">Why Blood Donation System</h2>
+                        <p>Blood Donation System is a website where you can easily find blood donors which are near you. You can also get registered as a donor to help peoples. </p>
                     </div>
                     <div class="row gy-4">
                         <div class="col-lg-12">
                             <div class="about-item">
-                                <div class="about-item__icon">
-                                    <i class="las la-shield-alt"></i></div>
+                                <div class="">
+                                    </div>
+                                <!-- <div class="about-item__icon">
+                                    <i class="las la-shield-alt"></i></div> -->
                                 <div class="about-item__content">
                                     <h4 class="about-item__title">All Data is Secured</h4>
                                     <p>Aamet consectetur adipisicing elit. Est voluptatibus accusamus nam labore, quam a
@@ -396,8 +403,10 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="about-item">
-                                <div class="about-item__icon">
-                                    <i class="las la-compass"></i></div>
+                                <div class="">
+                                    </i></div>
+                                <!-- <div class="about-item__icon">
+                                    <i class="las la-compass"></i></div> -->
                                 <div class="about-item__content">
                                     <h4 class="about-item__title">Always Free</h4>
                                     <p>Aamet consectetur adipisicing elit. Est voluptatibus accusamus nam labore, quam a
@@ -407,8 +416,10 @@
                         </div>
                         <div class="col-lg-12">
                             <div class="about-item">
-                                <div class="about-item__icon">
-                                    <i class="las la-magic"></i></div>
+                                <div class="">
+                                    </div>
+                                <!-- <div class="about-item__icon">
+                                    <i class="las la-magic"></i></div> -->
                                 <div class="about-item__content">
                                     <h4 class="about-item__title">100% Automated</h4>
                                     <p>Aamet consectetur adipisicing elit. Est voluptatibus accusamus nam labore, quam a
@@ -431,8 +442,8 @@
                 <div class="col-lg-6">
                     <div class="section-header text-center">
                         <h2 class="section-title">Top Donors</h2>
-                        <p class="mt-2">Dolor sit amet, consectetur adipisicing elit. Dignissimos soluta est qui totam
-                            expedita eaque, deleniti quidem sequi magni iure nulla corporis.</p>
+                        <!-- <p class="mt-2">Dolor sit amet, consectetur adipisicing elit. Dignissimos soluta est qui totam
+                            expedita eaque, deleniti quidem sequi magni iure nulla corporis.</p> -->
                     </div>
                 </div>
             </div>
@@ -464,7 +475,7 @@
             </div>
         </div>
     </section>
-    <section class="pt-100 pb-100 bg_img dark--overlay overflow-hidden"
+    <!-- <section class="pt-100 pb-100 bg_img dark--overlay overflow-hidden"
              style="background-image: url({{asset('front/assets/images/frontend/testimonial/60fffa7b16d461627388539.jpg')}});">
         <div class="container-fluid">
             <div class="row justify-content-center">
@@ -583,7 +594,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <section class="pt-100 pb-100 border-top  position-relative z-index-2 overflow-hidden">
         <div class="bottom-el-bg">
@@ -595,8 +606,6 @@
                 <div class="col-lg-6">
                     <div class="section-header text-center">
                         <h2 class="section-title">Latest Donor</h2>
-                        <p class="mt-2">Dolor sit amet, consectetur adipisicing elit. Dignissimos soluta est qui totam
-                            expedita eaque, deleniti quidem sequi magni iure nulla corporis.</p>
                     </div>
                 </div>
             </div>

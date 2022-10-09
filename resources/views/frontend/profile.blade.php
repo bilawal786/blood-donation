@@ -2,7 +2,9 @@
 @section('content')
     <div class="main-wrapper">
         <div class="profile-header dark--overlay bg_img"
-             style="background-image: url({{asset('assets/images/frontend/breadcrumb/61023f89990b81627537289.jpg')}});">
+             style="">
+        <!-- <div class="profile-header dark--overlay bg_img"
+             style="background-image: url({{asset('assets/images/frontend/breadcrumb/61023f89990b81627537289.jpg')}});"> -->
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
@@ -12,8 +14,8 @@
                                      src="{{asset($profile->img)}}" alt="image">
                             </div>
                             <div class="donor-profile__content">
-                                <h3 class="donor-profile__name">{{$profile->name}}</h3>
-                                <p><i class="las la-map-marker-alt mt-2"></i> Location : {{$profile->address}}</p>
+                                <h3 class="donor-profile__name text-dark">{{$profile->name}}</h3>
+                                <p><i class="las la-map-marker-alt mt-2 text-dark"></i> Location : {{$profile->address}}</p>
 
                             </div>
                         </div>

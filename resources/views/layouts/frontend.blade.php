@@ -6,12 +6,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BloodLab</title>
+    <title>Blood Donation System</title>
     <meta name="title" Content="BloodLab - Home">
     <meta name="description"
           content="Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit">
     <meta name="keywords" content="BloodLab,Blood Donation,Blood Donation Platform">
-    <link rel="shortcut icon" href="{{asset('Untitled-1.png')}}" type="image/x-icon">
+    <!-- <link rel="shortcut icon" href="{{asset('Untitled-1.png')}}" type="image/x-icon"> -->
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="{{ asset('css/main.css') }}">
     <link rel="stylesheet" href="{{ asset('css/color_skins.css') }}">
@@ -41,7 +41,7 @@
     <meta property="og:url" content="">
 
     <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" type="image/png" href="{{asset('front/assets/images/logoIcon/favicon.png')}}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{asset('front/assets/images/logoIcon/favicon1.png')}}" sizes="16x16">
     <link rel="stylesheet" href="{{asset('front/assets/templates/basic/frontend/css/lib/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('front/assets/templates/basic/frontend/css/all.min.css')}}">
     <link rel="stylesheet" href="{{asset('front/assets/templates/basic/frontend/css/line-awesome.min.css')}}">
@@ -92,14 +92,17 @@
             height: auto;
             overflow: hidden;
         }
+        .footer_heading {
+            color: black;
+        }
     </style>
 </head>
 <body>
-<div class="scroll-to-top">
+<!-- <div class="scroll-to-top">
             <span class="scroll-icon">
                 <i class="las la-arrow-up"></i>
             </span>
-</div>
+</div> -->
 <div class="preloader-holder">
     <div class="preloader">
         <div></div>
@@ -115,7 +118,7 @@
     </div>
 </div>
 <header class="header">
-    <div class="header__top">
+    <!-- <div class="header__top">
         <div class="container">
             <div class="row align-items-center gy-2">
                 <div class="col-lg-6 col-md-8 col-sm-9">
@@ -129,7 +132,7 @@
 
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="header__bottom">
         <div class="container">
@@ -184,11 +187,13 @@
                     @else
                         <div class="nav-right">
                             <a href="{{route('login')}}" class="btn btn-md btn--base d-flex align-items-center"><i
-                                    class="las la-user fs--18px me-2"></i> Login</a>
+                                    class="fs--18px me-2"></i> Login</a>
+                            <!-- <a href="{{route('login')}}" class="btn btn-md btn--base d-flex align-items-center"><i
+                                    class="las la-user fs--18px me-2"></i> Login</a> -->
                         </div>
                         <div style="padding-left: 1.125rem;" class="nav-right">
                             <a href="{{route('register')}}" class="btn btn-md btn--base d-flex align-items-center"><i
-                                    class="las la-user fs--18px me-2"></i> Register</a>
+                                    class="fs--18px me-2"></i> Register</a>
                         </div>
 
                     @endauth
@@ -201,11 +206,12 @@
 @yield('content')
 
 
-<footer class="footer img-overlay bg_img"
-        style="background-image: url({{asset('front/assets/images/frontend/footer/61023b2b0ac1b1627536171.jpg')}});">
-    <div class="footer__top">
+<footer class="">
+<!-- <footer class="footer img-overlay bg_img"
+        style="background-image: url({{asset('front/assets/images/frontend/footer/61023b2b0ac1b1627536171.jpg')}});"> -->
+    <div class="footer__top bg-dark">
         <div class="container">
-            <div class="footer-info-area">
+            <!-- <div class="footer-info-area">
                 <div class="row align-items-center gy-4">
                     <div class="col-lg-9">
                         <ul class="footer-contact-list justify-content-lg-start justify-content-center">
@@ -232,21 +238,21 @@
                         <a href="#top-donors" class="btn btn--base">Blood Donors</a>
                     </div>
                 </div>
-            </div>
+            </div> -->
 
             <div class="row gy-5 justify-content-between">
                 <div class="col-xl-4 col-lg-4 col-sm-8 order-lg-1 order-1">
                     <div class="footer-widget">
                         <a href="" class="footer-logo"><img src="{{asset('Untitled-1.png')}}"
                                                             alt="logo"></a>
-                        <p class="mt-3">Animi sequi aliquam illum voluptatum ratione, quaerat dignissimos fugiat. Ea,
-                            vitae odio quasi aspernatur expedita maiores, quidem voluptates libero quaerat fugiat nisi,
-                            ratione inventore iusto nostrum voluptas sint culpa.</p>
-                        <form class="subscribe-form mt-4">
+                        <p class="mt-3 text-light">Blood Donation System is a website where you can easily find blood 
+                            donors which are near you. You can also get registered as a donor to help peoples.
+                        </p>
+                        <!-- <form class="subscribe-form mt-4">
                             <input type="email" name="email" id="emailSub" class="form--control"
                                    placeholder="Enter email address">
                             <button type="button" class="subscribe-btn"><i class="lab la-telegram-plane"></i></button>
-                        </form>
+                        </form> -->
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-3 col-sm-6 order-lg-2 order-3">
@@ -277,11 +283,11 @@
                         <ul class="footer-overview-list text-end">
                             <li class="footer-overview">
                                 <h4 class="footer-overview__number">{{$users->where('role', 2)->count()}}</h4>
-                                <p class="footer-overview__caption">Donors</p>
+                                <p class="footer-overview__caption text-light">Donors</p>
                             </li>
                             <li class="footer-overview">
                                 <h4 class="footer-overview__number">{{$users->where('role', 1)->count()}}</h4>
-                                <p class="footer-overview__caption">Donee</p>
+                                <p class="footer-overview__caption text-light">Donee</p>
                             </li>
                         </ul>
                     </div>
@@ -289,11 +295,11 @@
             </div>
         </div>
     </div>
-    <div class="footer__bottom">
+    <div class="footer__bottom bg-dark">
         <div class="container">
             <div class="row">
-                <div class="col-lg-12 text-center">
-                    <p>Copyright © 2022 <a href="" class="text--base"> BloodLab </a> All Right Reserved</p>
+                <div class="col-lg-12 text-center text-light">
+                    <p>Copyright © 2022 <a href="" class="text--base"> Blood Donation System </a> All Right Reserved</p>
                 </div>
             </div>
         </div>
